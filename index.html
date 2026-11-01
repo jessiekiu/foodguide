@@ -361,7 +361,7 @@ zh:{
   lgNut:'想重点补充的营养', nutHint:'不选则按综合营养密度排序。', showOff:'也显示非当季食材',
   nut:{pro:'蛋白质', fe:'铁', ca:'钙', zn:'锌', ala:'Omega-3', vc:'维生素C'},
   hPlate:'今天这一餐', plateSub:'底是主食（五谷为养），上面按五方排出四色配菜与中央的黄：南火赤，东木青，中土黄，西金白，北水黑。',
-  stapleLbl:'主食', stapleAuto:'自动推荐', baseLbl:'底 · 五谷为养', withBean:'同煮',
+  stapleLbl:'主食', stapleAuto:'自动推荐', baseLbl:'底 · 五谷为养', withBean:'同煮', fromBase:'由主食补足', colorPending:'（颜色归类待中医审核）',
   hPot:'一锅五色 · 下锅顺序', potSub:'把这一餐煮成一锅的参考做法。耐煮的先下，嫩的后下，种子关火后再撒。',
   step:{1:'先下锅，加足水煮开后转小火约 40–60 分钟（视豆的种类）', 2:'出锅前约 15–20 分钟放入', 3:'出锅前约 5–8 分钟放入', 4:'最后 1–2 分钟放入', 5:'关火后撒上', 0:'不入锅，饭后或另吃'},
   stepFirst:{2:'先下锅，煮开后转小火约 15–20 分钟', 3:'先下锅，约 5–8 分钟'},
@@ -395,7 +395,7 @@ zh:{
   nat:{cold:'寒', cool:'凉', neutral:'平', warm:'温', hot:'热', mixed:'生寒熟温'}, natB:n => '性' + n,
   avail:{in:'当季', off:'非当季', all:'全年', grown:'全年栽培', stores:'全年可储', imported:'多为进口', notLocal:'非当地出产', winterImp:'冬季多为温室 / 外地'},
   pctB:(n, p) => `${n} ${p}%`, why:'推荐理由：', r:{fit:'合你的体质', seasonColor:c => `本季宜${c}色`, whole:'完整食物', each:(n, p) => `每份${n} ${p}%`},
-  none:'本月暂无', noneHint:'可打开“也显示非当季食材”查看', alt:'买不到可换：', sep:'、', join:'、',
+  none:'本月暂无', noneHint:'这个月没有符合标准的当季食材', alt:'买不到可换：', sep:'、', join:'、',
   listSub:'按合适程度排序：时令、体质、所选营养（按每份）、完整度都计入。点开可看推荐理由和营养数据。', hidden:n => `已隐藏 ${n} 种非当季食材。`,
   more:n => `显示全部 ${n} 种`, empty:'没有符合条件的食材。试试清空搜索、选“全部”颜色，或打开“也显示非当季食材”。',
   org:'宜买有机', perS:s => `每份（${s}）`, per100:b => `每100克（${b}）`, dvRow:'占每日所需', amount:'含量',
@@ -435,7 +435,7 @@ en:{
   lgNut:'Nutrients to focus on', nutHint:'Leave blank to rank by overall nutrient density.', showOff:'Also show out-of-season foods',
   nut:{pro:'Protein', fe:'Iron', ca:'Calcium', zn:'Zinc', ala:'Omega-3', vc:'Vitamin C'},
   hPlate:'Today’s meal', plateSub:'A grain base (“the five grains nourish”), topped with the five colors laid out on the five directions: Fire (red) south at the top, Wood (green) east, Earth (yellow) in the center, Metal (white) west, Water (black) north.',
-  stapleLbl:'Staple', stapleAuto:'Auto pick', baseLbl:'Base · the five grains nourish', withBean:'cooked with',
+  stapleLbl:'Staple', stapleAuto:'Auto pick', baseLbl:'Base · the five grains nourish', withBean:'cooked with', fromBase:'Covered by the staple', colorPending:'(color category awaiting TCM review)',
   hPot:'Five colors, one pot', potSub:'A way to cook this meal as one pot. Sturdy ingredients go in first, tender ones last, and seeds after the heat is off.',
   step:{1:'Put in first; bring to a boil, then simmer about 40–60 min (depends on the bean)', 2:'Add about 15–20 min before the end', 3:'Add about 5–8 min before the end', 4:'Add for the last 1–2 min', 5:'Sprinkle on after turning off the heat', 0:'Not in the pot: eat after the meal or on the side'},
   stepFirst:{2:'Put in first; bring to a boil, then simmer about 15–20 min', 3:'Put in first; about 5–8 min'},
@@ -469,7 +469,7 @@ en:{
   nat:{cold:'Cold', cool:'Cool', neutral:'Neutral', warm:'Warm', hot:'Hot', mixed:'Cold raw, warm cooked'}, natB:n => n,
   avail:{in:'In season', off:'Out of season', all:'Year-round', grown:'Grown year-round', stores:'Stores year-round', imported:'Mostly imported', notLocal:'Not grown locally', winterImp:'Winter: greenhouse or shipped in'},
   pctB:(n, p) => `${n} ${p}%`, why:'Why: ', r:{fit:'suits your constitution', seasonColor:c => `${c.toLowerCase()} suits the season`, whole:'whole food', each:(n, p) => `${n} ${p}% per serving`},
-  none:'None this month', noneHint:'Turn on “Also show out-of-season foods”', alt:'Can’t find it? Try: ', sep:', ', join:' and ',
+  none:'None this month', noneHint:'No in-season food meets the criteria this month', alt:'Can’t find it? Try: ', sep:', ', join:' and ',
   listSub:'Ranked by overall fit: season, constitution, chosen nutrients (per serving) and wholeness all count. Open a food to see why and its nutrition.', hidden:n => ` ${n} out-of-season foods hidden.`,
   more:n => `Show all ${n}`, empty:'No foods match. Try clearing the search, choosing “All” colors, or turning on “Also show out-of-season foods”.',
   org:'Buy organic', perS:s => `Per serving (${s})`, per100:b => `Per 100 g (${b})`, dvRow:'% Daily Value', amount:'Amount',
@@ -515,6 +515,9 @@ const JIEQI = [[1,'小寒','Minor Cold'],[1,'大寒','Major Cold'],[2,'立春','
 const COLORS = ['青','赤','黄','白','黑'];
 const TROPICAL_ONLY = new Set(['番石榴']);
 const NOT_IN_PLATE = new Set(['生姜','营养酵母(强化)']);
+// grain/bean colors not yet confirmed by the TCM review; they do not fill a missing color
+const COLOR_PENDING = new Set(['燕麦(燕麦片)','鹰嘴豆','糙米','藜麦','小扁豆','黄豆','大麦(去壳)','荞麦']);
+const YELLOW_FILL = '小米';
 const NOW = new Date();
 const TODAY = `${NOW.getFullYear()}-${NOW.getMonth()+1}-${NOW.getDate()}`;
 
@@ -673,23 +676,31 @@ function render(){
 
   // staple + bean
   const stapleCands = scored.filter(x => (x.f.cat === '全谷' || ['红薯','山药'].includes(x.f.zh)) && x.a.s !== 'off');
+  const sideOK = (x, c) => x.f.color === c && x.a.s !== 'off' && x.f.cat !== '全谷' && x.f.cat !== '坚果种子' && !(x.f.cat === '豆类' && x.f.stage === 1) && !NOT_IN_PLATE.has(x.f.zh);
+  // five colors first: if no in-season yellow side dish, let a yellow grain fill the center
+  const noYellow = !scored.some(x => sideOK(x, '黄'));
+  const grains = stapleCands.filter(x => x.f.cat === '全谷');
+  const autoStaple = (noYellow && grains.find(x => x.f.zh === YELLOW_FILL)) || grains[0] || stapleCands[0];
   const sel = $('staple');
-  sel.innerHTML = `<option value="auto">${L.stapleAuto}${stapleCands.find(x => x.f.cat === '全谷') ? (en() ? ': ' : '：') + esc(nm(stapleCands.find(x => x.f.cat === '全谷').f)) : ''}</option>` +
+  sel.innerHTML = `<option value="auto">${L.stapleAuto}${autoStaple ? (en() ? ': ' : '：') + esc(nm(autoStaple.f)) : ''}</option>` +
     stapleCands.map(x => `<option value="${esc(x.f.zh)}">${esc(nm(x.f))}</option>`).join('');
   if(state.staple !== 'auto' && !stapleCands.some(x => x.f.zh === state.staple)) state.staple = 'auto';
   sel.value = state.staple;
-  const autoStaple = stapleCands.find(x => x.f.cat === '全谷') || stapleCands[0];
   const staple = state.staple === 'auto' ? autoStaple : byZh(state.staple);
   const bean = scored.find(x => x.f.cat === '豆类' && x.f.whole === '完整' && x.f.stage === 1 && x.f.zh !== '黄豆' && x.a.s !== 'off');
   const used = new Set([staple && staple.f.zh, bean && bean.f.zh]);
 
   const pick = {};
-  COLORS.forEach(c => { pick[c] = scored.filter(x => x.f.color === c && x.a.s !== 'off' && x.f.cat !== '全谷' && x.f.cat !== '坚果种子' && !(x.f.cat === '豆类' && x.f.stage === 1) && !NOT_IN_PLATE.has(x.f.zh) && !used.has(x.f.zh)).sort((a, b) => (a.f.cat === '水果') - (b.f.cat === '水果')).slice(0, 3); });
+  COLORS.forEach(c => { pick[c] = scored.filter(x => sideOK(x, c) && !used.has(x.f.zh)).sort((a, b) => (a.f.cat === '水果') - (b.f.cat === '水果')).slice(0, 3); });
   const short = x => reasons(x).slice(0, 3).join(' · ');
   const cell = c => {
     const p = pick[c];
     const head = `<span class="dir">${L.dir[c]} · ${L.el[c]} · ${L.organ[c]}</span>`;
-    if(!p.length) return `<div class="cell c-${c}">${head}<span class="nm">${L.none}</span><span class="why">${L.noneHint}</span></div>`;
+    if(!p.length){
+      const fromBase = [staple, bean].filter(x => x && x.f.color === c && !COLOR_PENDING.has(x.f.zh));
+      if(fromBase.length) return `<div class="cell c-${c}${c === si.color ? ' focus' : ''}">${head}<span class="nm">${fromBase.map(x => esc(nm(x.f))).join(L.sep)}</span><span class="why">${L.fromBase}</span></div>`;
+      return `<div class="cell c-${c}">${head}<span class="nm">${L.none}</span><span class="why">${L.noneHint}</span></div>`;
+    }
     const top = p[0];
     return `<div class="cell c-${c}${c === si.color ? ' focus' : ''}">${head}
       <span class="nm">${esc(nm(top.f))}</span><span class="why">${esc(short(top))}</span>
@@ -806,7 +817,7 @@ function foodCard(x, i){
         ${ok(val('hi')) ? `<dt>${L.dt.hi}</dt><dd>${draftMark(val('hi'))}</dd>` : ''}
         ${ok(val('xw')) ? `<dt>${L.dt.xw}</dt><dd>${draftMark(val('xw'))}${ok(gj) ? draftMark(L.gj(gj)) : ''}</dd>` : ''}
         ${ok(val('yj')) ? `<dt>${L.dt.yj}</dt><dd>${draftMark(val('yj'))}</dd>` : ''}
-        <dt>${L.dt.wx}</dt><dd>${L.wx(L.color[f.color], L.el[f.color], L.organ[f.color])}</dd>
+        <dt>${L.dt.wx}</dt><dd>${L.wx(L.color[f.color], L.el[f.color], L.organ[f.color])}${COLOR_PENDING.has(f.zh) ? ` <span class="draft">${L.colorPending}</span>` : ''}</dd>
         <dt>${L.dt.qi}</dt><dd>${draftMark(L.qiTxt(L.qi[f.qi], L.whole[f.whole], val('qinote')))}</dd>
         <dt>${L.dt.prep}</dt><dd>${draftMark(val('prep'))}</dd>
         ${ok(val('caut')) ? `<dt>${L.dt.caut}</dt><dd>${draftMark(val('caut'))}</dd>` : ''}
