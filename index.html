@@ -6,9 +6,6 @@
 <style>[hidden]{display:none!important} body{margin:0} img{max-width:100%}</style>
 <title>东西有道食材指南</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
 <style>
 /* Layout: a settings column beside a results column; the five-color plate is laid out on the traditional 五方 cross (南 on top, 中 at center). */
 :root{
@@ -16,19 +13,20 @@
   --qing:#3E8558; --chi:#B5432F; --huang:#C4922A; --bai:#ECE8DC; --hei:#2A2C38;
   --on-qing:#fff; --on-chi:#fff; --on-huang:#1B2420; --on-bai:#1B2420; --on-hei:#F1F1F4;
   --good:#2D6A55; --warn:#9A6A12; --off:#8B8F8C;
-  --display:"Noto Serif SC","Songti SC","SimSun",serif;
-  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --display:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","Noto Serif SC","SimSun",Georgia,serif;
+  --body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sci:#1F5F8B; --sci-bg:#E1ECF5; --trad:#8A4B1E; --trad-bg:#F5E7DA;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#111613; --surface:#18201C; --ink:#E4EAE6; --muted:#9AA8A0; --line:#2C3832; --accent:#7EC3A7; --accent-soft:#1F3229;
   --qing:#4F9C6A; --chi:#C85A45; --huang:#D2A23C; --bai:#DCD8CC; --hei:#3B3E52;
   --on-qing:#fff; --on-chi:#fff; --on-huang:#151a17; --on-bai:#151a17; --on-hei:#F1F1F4;
-  --good:#7EC3A7; --warn:#E0B355; --off:#6F7672; color-scheme:dark}}
+  --good:#7EC3A7; --warn:#E0B355; --off:#6F7672; --sci:#9CC8EA; --sci-bg:#1C2D3B; --trad:#E9B98F; --trad-bg:#3A2A1E; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#111613; --surface:#18201C; --ink:#E4EAE6; --muted:#9AA8A0; --line:#2C3832; --accent:#7EC3A7; --accent-soft:#1F3229;
   --qing:#4F9C6A; --chi:#C85A45; --huang:#D2A23C; --bai:#DCD8CC; --hei:#3B3E52;
   --on-qing:#fff; --on-chi:#fff; --on-huang:#151a17; --on-bai:#151a17; --on-hei:#F1F1F4;
-  --good:#7EC3A7; --warn:#E0B355; --off:#6F7672; color-scheme:dark}
+  --good:#7EC3A7; --warn:#E0B355; --off:#6F7672; --sci:#9CC8EA; --sci-bg:#1C2D3B; --trad:#E9B98F; --trad-bg:#3A2A1E; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
@@ -130,13 +128,68 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 .langsw{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
 .langsw button{font:inherit;font-size:13px;border:0;background:transparent;color:var(--ink);padding:5px 14px;cursor:pointer}
 .langsw button[aria-pressed="true"]{background:var(--accent);color:var(--surface);font-weight:700}
-.langsw button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.tips li{grid-template-columns:minmax(22px,auto) 1fr}
-:root[lang="en"] .tips li{grid-template-columns:4.6em 1fr}
-:root[lang="en"] .tips li .k{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;text-align:left}
+.langsw button:focus-visible,.small-btn:focus-visible,.ddb button:focus-visible,details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 :root[lang="en"] .cell .nm{font-size:18px}
 :root[lang="en"] .brand small{letter-spacing:.06em}
 :root[lang="en"] .kv{grid-template-columns:7.5em minmax(0,1fr)}
+.quiz{border-top:1px dashed var(--line);padding-top:8px;font-size:13px}
+.quiz summary{cursor:pointer;color:var(--accent);font-weight:500}
+.quiz .qq{margin-top:10px}
+.quiz .qq legend{font-weight:500;font-size:13px;letter-spacing:0;margin-bottom:6px}
+.quiz-res{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-weight:700}
+.small-btn{font:inherit;font-size:13px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);border-radius:999px;padding:4px 12px;cursor:pointer}
+.staple-pick{display:flex;gap:10px;align-items:center;margin-bottom:10px;max-width:620px}
+.staple-pick label{font-weight:700;font-size:13px;white-space:nowrap}
+.staple-pick select{max-width:280px}
+.base{grid-column:1/-1;border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.base.c-白{border:1px solid var(--line)}
+.base .dir{font-size:11px;letter-spacing:.12em;opacity:.85}
+.base .nm{font-family:var(--display);font-size:20px;line-height:1.3}
+.base .nm small{font-family:var(--body);font-size:12px;opacity:.85;margin:0 4px}
+.base .why{font-size:12px;opacity:.92}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:st;max-width:720px}
+.steps li{display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:12px;padding:10px 0;border-bottom:1px solid var(--line);counter-increment:st}
+.steps li::before{content:counter(st);grid-row:span 2;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--surface);display:grid;place-items:center;font-size:13px;font-weight:700}
+.steps li b{font-size:14px}
+.steps li span{font-size:15px}
+.steps li small{color:var(--muted);font-size:12px}
+.steps li.side::before{background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+.steps li.note{display:block;border:0;color:var(--muted);font-size:13px;counter-increment:none;padding-top:8px}
+.steps li.note::before{content:none}
+.tips li{grid-template-columns:auto minmax(0,1fr);gap:10px}
+.evs{display:flex;gap:4px;flex-wrap:wrap;min-width:3.4em}
+.ev{font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;white-space:nowrap;line-height:1.6}
+.ev.sci{background:var(--sci-bg);color:var(--sci)}
+.ev.trad{background:var(--trad-bg);color:var(--trad)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.spice-picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-bottom:10px}
+.sp{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);display:grid;gap:2px}
+.sp small{color:var(--muted)}
+.sp span{font-size:13px;color:var(--muted)}
+details.fold>summary{cursor:pointer;font-weight:500;color:var(--accent);padding:4px 0}
+.h2like{font-family:var(--display);font-size:22px;color:var(--ink);font-weight:700}
+details.fold>summary.h2like{color:var(--ink)}
+.spt{border-collapse:collapse;font-size:13px;min-width:680px}
+.spt th,.spt td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.spt th{color:var(--muted);font-weight:500}
+.dd-count{font-size:13px;color:var(--muted);margin-left:8px;font-variant-numeric:tabular-nums}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 18px;margin-bottom:10px}
+.ddr{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);min-width:0}
+.ddl{min-width:0}
+.ddl b{font-size:14px;display:block}
+.ddl small{color:var(--muted);font-size:12px}
+.ddb{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.ddb button{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--accent);background:transparent;cursor:pointer;padding:0}
+.ddb button[aria-pressed="true"]{background:var(--accent)}
+.reason{grid-column:2/4;font-size:12px;color:var(--muted);min-width:0}
+.ntable td.rl{text-align:left;color:var(--muted);white-space:normal;min-width:9em}
+.ntable td.hit2{font-weight:700;color:var(--good)}
+.ntable tr.sub td{color:var(--muted);font-size:12px}
+.layers{display:grid;gap:10px;margin:10px 0}
+.layer{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start}
+.layer .ln{width:26px;height:26px;border-radius:6px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700}
+.layer p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+.kv dd small{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -185,6 +238,11 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
       <label><input type="radio" name="tz" id="tz-hot" value="hot"><span data-t="tzhot"></span></label>
     </div>
     <p class="hint" id="tz-hint"></p>
+    <details class="quiz" id="quiz">
+      <summary data-t="quizTitle"></summary>
+      <div id="quiz-qs"></div>
+      <div class="quiz-res"><span id="quiz-out"></span><button type="button" id="quiz-apply" class="small-btn"></button></div>
+    </details>
   </fieldset>
   <fieldset>
     <legend data-t="lgNut"></legend>
@@ -204,12 +262,33 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   <section>
     <h2 data-t="hPlate"></h2>
     <p class="sec-sub" data-t="plateSub"></p>
+    <div class="staple-pick"><label for="staple" data-t="stapleLbl"></label><select id="staple"></select></div>
     <div class="plate" id="plate"></div>
   </section>
 
   <section>
     <h2 data-t="hTips"></h2>
+    <p class="sec-sub legend"><span class="ev sci" data-t="evSci"></span> <span data-t="evSciD"></span> <span class="ev trad" data-t="evTrad"></span> <span data-t="evTradD"></span></p>
     <ul class="tips" id="tips"></ul>
+  </section>
+
+  <section>
+    <h2 data-t="hSpice"></h2>
+    <p class="sec-sub" id="spice-sub"></p>
+    <div class="spice-picks" id="spice-picks"></div>
+    <details class="fold">
+      <summary data-t="spiceAll"></summary>
+      <div class="ntable"><table class="spt" id="spice-table"></table></div>
+    </details>
+  </section>
+
+  <section>
+    <details class="fold dd" id="dd-wrap">
+      <summary><span class="h2like" data-t="hDD"></span> <span class="dd-count" id="dd-count"></span></summary>
+      <p class="sec-sub" data-t="ddSub"></p>
+      <div class="dd-grid" id="dd"></div>
+      <button type="button" class="small-btn" id="dd-reset" data-t="ddReset"></button>
+    </details>
   </section>
 
   <section>
@@ -226,6 +305,14 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     </div>
     <div class="foods" id="foods"></div>
   </section>
+
+  <section>
+    <details class="fold">
+      <summary class="h2like" data-t="hPrin"></summary>
+      <div class="layers" id="layers"></div>
+      <p class="sec-sub" id="refs"></p>
+    </details>
+  </section>
 </main>
 </div>
 
@@ -237,33 +324,68 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 </div>
 
 <script>
-const FOODS = [{"zh":"小扁豆","en":"Lentils","cat":"豆类","basis":"煮熟","n":{"kcal":116,"pro":9.0,"fib":7.9,"ca":19,"fe":3.3,"zn":1.3,"ala":null,"vc":1.5},"hi":"叶酸丰富(181µg)","xw":"传统典籍少记载","gj":"—","yj":"待东方组评估","prep":"无需长时间浸泡，煮15–20分钟即可","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽；发芽后更具生命力","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Rich in folate (181 µg)","xw":"Rarely recorded in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"No long soak needed; simmer 15–20 min","caut":"—","qinote":"Living seed, can be sprouted; sprouting adds vitality","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"}},{"zh":"鹰嘴豆","en":"Chickpeas","cat":"豆类","basis":"煮熟","n":{"kcal":164,"pro":8.9,"fib":7.6,"ca":49,"fe":2.9,"zn":1.5,"ala":null,"vc":1.3},"hi":"叶酸、锰","xw":"甘，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"浸泡8–12小时后煮，可降低植酸、减少胀气","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Folate, manganese","xw":"Sweet, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Soak 8–12 h before cooking to cut phytates and gas","caut":"—","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"}},{"zh":"黄豆","en":"Soybeans","cat":"豆类","basis":"煮熟","n":{"kcal":172,"pro":18.2,"fib":6.0,"ca":102,"fe":5.1,"zn":1.2,"ala":0.6,"vc":1.7},"hi":"完全蛋白；含ALA","xw":"甘，平","gj":"脾、大肠","yj":"脾胃虚寒者不宜过量","prep":"浸泡后煮透；发芽或发酵可提高矿物质吸收","caut":"需充分煮熟，生豆含抗营养因子","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽(黄豆芽)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"高","orgn":"美国大豆多为转基因，须选有机或认证非转基因","e":{"hi":"Complete protein; contains ALA","xw":"Sweet, neutral","gj":"Spleen, Large Intestine","yj":"Not in excess if digestion runs cold and weak","prep":"Soak, then cook thoroughly; sprouting or fermenting improves mineral absorption","caut":"Must be fully cooked; raw beans contain anti-nutrients","qinote":"Living seed, can be sprouted (soybean sprouts)","orgn":"Most US soy is GMO — buy organic or certified non-GMO","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"}},{"zh":"北豆腐(钙凝固)","en":"Tofu, firm (calcium-set)","cat":"豆类","basis":"生，钙盐凝固","n":{"kcal":144,"pro":17.3,"fib":2.3,"ca":683,"fe":2.7,"zn":1.6,"ala":0.6,"vc":0.2},"hi":"钙质主要来源之一(视凝固剂)","xw":"甘，凉","gj":"脾、胃、大肠","yj":"脾胃虚寒者宜热食","prep":"选用以硫酸钙/氯化镁凝固者，查看标签","caut":"钙含量因凝固剂差异很大","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"轻加工","qi":"低","qinote":"加工制品；宜选当天新鲜制作","trad":"全年","fl":"全年(耐储)","orgp":"高","orgn":"原料黄豆须有机或非转基因","e":{"hi":"A key calcium source (depends on the coagulant)","xw":"Sweet, cool","gj":"Spleen, Stomach, Large Intestine","yj":"Eat it warm if digestion runs cold","prep":"Choose tofu set with calcium sulfate or magnesium chloride; check the label","caut":"Calcium varies widely with the coagulant","qinote":"Processed food; choose freshly made","orgn":"Soybeans must be organic or non-GMO","trad":"Year-round","basis":"raw, calcium-set","cat":"Legumes"}},{"zh":"毛豆","en":"Edamame","cat":"豆类","basis":"煮熟","n":{"kcal":121,"pro":11.9,"fib":5.2,"ca":63,"fe":2.3,"zn":1.4,"ala":0.4,"vc":6.1},"hi":"叶酸极丰富(311µg)","xw":"甘，平(初稿)","gj":"脾、大肠(初稿)","yj":"待东方组审核","prep":"沸水煮5分钟","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜豆荚，现采现煮","trad":"夏","fl":"待查","orgp":"高","orgn":"须有机或非转基因","e":{"hi":"Very rich in folate (311 µg)","xw":"Sweet, neutral (draft)","gj":"Spleen, Large Intestine (draft)","yj":"Pending Eastern review","prep":"Boil for 5 minutes","caut":"—","qinote":"Fresh pods; cook soon after picking","orgn":"Must be organic or non-GMO","trad":"Summer","basis":"cooked","cat":"Legumes"}},{"zh":"赤小豆/红豆","en":"Adzuki beans","cat":"豆类","basis":"煮熟","n":{"kcal":128,"pro":7.5,"fib":7.3,"ca":28,"fe":2.0,"zn":1.8,"ala":null,"vc":0},"hi":"钾、叶酸","xw":"甘、酸，平","gj":"心、小肠","yj":"利水消肿；体瘦津亏者慎多食","prep":"浸泡4–8小时后煮","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Potassium, folate","xw":"Sweet, sour, neutral","gj":"Heart, Small Intestine","yj":"Drains dampness and reduces swelling; go easy if thin or dry","prep":"Soak 4–8 h before cooking","caut":"—","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"}},{"zh":"绿豆","en":"Mung beans","cat":"豆类","basis":"煮熟","n":{"kcal":105,"pro":7.0,"fib":7.6,"ca":27,"fe":1.4,"zn":0.8,"ala":null,"vc":1.0},"hi":"叶酸；发芽后维C上升","xw":"甘，寒","gj":"心、胃","yj":"清热解暑；脾胃虚寒者慎用","prep":"浸泡或发芽(绿豆芽)","caut":"寒性较强，冬季及体寒者少量","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"活种子，发芽(绿豆芽)最具生命力","trad":"夏","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Folate; vitamin C rises when sprouted","xw":"Sweet, cold","gj":"Heart, Stomach","yj":"Clears summer heat; caution if digestion runs cold","prep":"Soak, or sprout into mung bean sprouts","caut":"Strongly cooling — small amounts in winter or for cold constitutions","qinote":"Living seed; sprouts are its most vital form","orgn":"—","trad":"Summer","basis":"cooked","cat":"Legumes"}},{"zh":"黑豆(黑芸豆)","en":"Black beans","cat":"豆类","basis":"煮熟","n":{"kcal":132,"pro":8.9,"fib":8.7,"ca":27,"fe":2.1,"zn":1.1,"ala":null,"vc":0},"hi":"花青素(种皮)、叶酸","xw":"甘，平(按黑豆，初稿)","gj":"脾、肾(初稿)","yj":"注意：中医“黑豆”多指黑大豆，与黑芸豆不同，待东方组区分","prep":"浸泡8–12小时后煮","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Anthocyanins (in the skin), folate","xw":"Sweet, neutral (as black soybean, draft)","gj":"Spleen, Kidney (draft)","yj":"Note: in TCM 黑豆 usually means black soybean, not black turtle bean — Eastern team to clarify","prep":"Soak 8–12 h before cooking","caut":"—","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"}},{"zh":"藜麦","en":"Quinoa","cat":"全谷","basis":"煮熟","n":{"kcal":120,"pro":4.4,"fib":2.8,"ca":17,"fe":1.5,"zn":1.1,"ala":null,"vc":0},"hi":"完全蛋白、镁","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"煮前冲洗去皂苷","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"有多色品种(红、黑)，可丰富五色","e":{"hi":"Complete protein, magnesium","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Rinse well before cooking to remove saponins","caut":"—","qinote":"Living seed, can be sprouted","orgn":"Red and black varieties add more of the five colors","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"}},{"zh":"燕麦(燕麦片)","en":"Oats","cat":"全谷","basis":"干重","n":{"kcal":379,"pro":13.2,"fib":10.1,"ca":52,"fe":4.3,"zn":3.6,"ala":null,"vc":0},"hi":"β-葡聚糖","xw":"甘，平","gj":"脾、胃、肝","yj":"—","prep":"可隔夜浸泡","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"轻加工","qi":"中","qinote":"压片后不能发芽；可改选燕麦米(oat groats)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"高","orgn":"常规燕麦草甘膦残留较常见，优先有机","e":{"hi":"Beta-glucan","xw":"Sweet, neutral","gj":"Spleen, Stomach, Liver","yj":"—","prep":"Can be soaked overnight","caut":"—","qinote":"Rolled oats can't sprout; choose oat groats for that","orgn":"Conventional oats often carry glyphosate residue — prefer organic","trad":"Autumn harvest · stores well","basis":"dry","cat":"Whole grains"}},{"zh":"糙米","en":"Brown rice","cat":"全谷","basis":"煮熟","n":{"kcal":123,"pro":2.7,"fib":1.6,"ca":3,"fe":0.6,"zn":0.7,"ala":null,"vc":0},"hi":"镁、B族维生素","xw":"甘，平","gj":"脾、胃","yj":"—","prep":"浸泡数小时后煮，口感更软","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽(发芽糙米)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"留意砷：多水煮后沥水；产地选择比有机更重要","e":{"hi":"Magnesium, B vitamins","xw":"Sweet, neutral","gj":"Spleen, Stomach","yj":"—","prep":"Soak a few hours for a softer texture","caut":"—","qinote":"Living seed, can be sprouted (germinated brown rice)","orgn":"Watch arsenic: cook in extra water and drain; origin matters more than organic","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"}},{"zh":"小米","en":"Millet","cat":"全谷","basis":"煮熟","n":{"kcal":119,"pro":3.5,"fib":1.3,"ca":3,"fe":0.6,"zn":0.9,"ala":null,"vc":0},"hi":"镁、磷","xw":"甘、咸，凉","gj":"脾、胃、肾","yj":"健脾和胃","prep":"适合煮粥","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"中","qinote":"去壳后发芽力弱","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Magnesium, phosphorus","xw":"Sweet, salty, cool","gj":"Spleen, Stomach, Kidney","yj":"Strengthens the spleen and settles the stomach","prep":"Ideal for congee","caut":"—","qinote":"Sprouts poorly once hulled","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"}},{"zh":"荞麦","en":"Buckwheat groats","cat":"全谷","basis":"煮熟","n":{"kcal":92,"pro":3.4,"fib":2.7,"ca":7,"fe":0.8,"zn":0.6,"ala":null,"vc":0},"hi":"芦丁、镁","xw":"甘，凉","gj":"脾、胃、大肠","yj":"脾胃虚寒者不宜多食","prep":"可烘烤后煮，香气更好","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"生荞麦粒可发芽(选未烘烤的)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Rutin, magnesium","xw":"Sweet, cool","gj":"Spleen, Stomach, Large Intestine","yj":"Not too much if digestion runs cold","prep":"Toast before cooking for more aroma","caut":"—","qinote":"Raw (untoasted) groats can sprout","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"}},{"zh":"大麦(去壳)","en":"Barley, pearled","cat":"全谷","basis":"煮熟","n":{"kcal":123,"pro":2.3,"fib":3.8,"ca":11,"fe":1.3,"zn":0.8,"ala":null,"vc":0},"hi":"β-葡聚糖","xw":"甘、咸，凉","gj":"脾、胃","yj":"—","prep":"浸泡后煮","caut":"含麸质","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"轻加工","qi":"低","qinote":"珍珠麦已去麸，不能发芽；建议改选去壳大麦(hulled)","trad":"夏收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Beta-glucan","xw":"Sweet, salty, cool","gj":"Spleen, Stomach","yj":"—","prep":"Soak before cooking","caut":"Contains gluten","qinote":"Pearled barley has lost its bran and can't sprout — choose hulled barley","orgn":"—","trad":"Summer harvest · stores well","basis":"cooked","cat":"Whole grains"}},{"zh":"亚麻籽","en":"Flaxseed","cat":"坚果种子","basis":"干","n":{"kcal":534,"pro":18.3,"fib":27.3,"ca":255,"fe":5.7,"zn":4.3,"ala":22.8,"vc":0.6},"hi":"ALA最丰富来源之一；木酚素","xw":"传统典籍少记载(胡麻类)","gj":"—","yj":"待东方组评估","prep":"需磨碎才能吸收；磨粉后冷藏","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子；整粒保存，食用前现磨","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"One of the richest ALA sources; lignans","xw":"Rarely recorded in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Must be ground to be absorbed; refrigerate once ground","caut":"—","qinote":"Living seed; store whole and grind just before eating","orgn":"—","trad":"Autumn harvest · stores well","basis":"dried","cat":"Nuts & seeds"}},{"zh":"奇亚籽","en":"Chia seeds","cat":"坚果种子","basis":"干","n":{"kcal":486,"pro":16.5,"fib":34.4,"ca":631,"fe":7.7,"zn":4.6,"ala":17.8,"vc":1.6},"hi":"ALA、钙、可溶性纤维","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"浸泡成凝胶后食用","caut":"需配足够水分","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"ALA, calcium, soluble fiber","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Soak into a gel before eating","caut":"Drink enough water with it","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Stores well","basis":"dried","cat":"Nuts & seeds"}},{"zh":"核桃","en":"Walnuts","cat":"坚果种子","basis":"生","n":{"kcal":654,"pro":15.2,"fib":6.7,"ca":98,"fe":2.9,"zn":3.1,"ala":9.1,"vc":1.3},"hi":"ALA最丰富坚果","xw":"甘，温","gj":"肾、肺、大肠","yj":"痰热、腹泻者慎用","prep":"生食或低温烘烤","caut":"坚果过敏者避免","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"中","qinote":"去壳后生命力渐弱；带壳保存、现剥更佳","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"The highest-ALA nut","xw":"Sweet, warm","gj":"Kidney, Lung, Large Intestine","yj":"Caution with phlegm-heat or loose stools","prep":"Eat raw or lightly toasted","caut":"Avoid with a nut allergy","qinote":"Vitality fades after shelling; store in the shell and crack fresh","orgn":"—","trad":"Autumn","basis":"raw","cat":"Nuts & seeds"}},{"zh":"黑芝麻","en":"Black sesame (whole)","cat":"坚果种子","basis":"干，整粒","n":{"kcal":573,"pro":17.7,"fib":11.8,"ca":975,"fe":14.6,"zn":7.8,"ala":null,"vc":0},"hi":"钙、铁、锌均高","xw":"甘，平","gj":"肝、肾、大肠","yj":"便溏者慎用","prep":"炒香后磨碎吸收更好(整粒难消化)","caut":"数据为带皮芝麻","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"整粒活种子；现炒现磨","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"High in calcium, iron and zinc","xw":"Sweet, neutral","gj":"Liver, Kidney, Large Intestine","yj":"Caution with loose stools","prep":"Toast and grind for better absorption (whole seeds pass undigested)","caut":"Figures are for unhulled seeds","qinote":"Whole living seed; toast and grind fresh","orgn":"—","trad":"Autumn","basis":"dried, whole","cat":"Nuts & seeds"}},{"zh":"南瓜籽仁","en":"Pumpkin seeds","cat":"坚果种子","basis":"干","n":{"kcal":559,"pro":30.2,"fib":6.0,"ca":46,"fe":8.8,"zn":7.8,"ala":null,"vc":1.9},"hi":"锌、镁极丰富(镁592mg)","xw":"甘，平(初稿)","gj":"大肠(初稿)","yj":"待东方组审核","prep":"生食或低温烘烤","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"中","qinote":"去壳生籽，部分可发芽","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Very rich in zinc and magnesium (592 mg)","xw":"Sweet, neutral (draft)","gj":"Large Intestine (draft)","yj":"Pending Eastern review","prep":"Eat raw or lightly toasted","caut":"—","qinote":"Hulled raw seeds; some can sprout","orgn":"—","trad":"Autumn","basis":"dried","cat":"Nuts & seeds"}},{"zh":"火麻仁","en":"Hemp seeds, hulled","cat":"坚果种子","basis":"去壳","n":{"kcal":553,"pro":31.6,"fib":4.0,"ca":70,"fe":8.0,"zn":9.9,"ala":8.7,"vc":0.5},"hi":"蛋白、锌、ALA","xw":"甘，平","gj":"脾、胃、大肠","yj":"润肠通便；便溏者慎用","prep":"直接撒于食物","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"轻加工","qi":"低","qinote":"去壳后不能发芽","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Protein, zinc, ALA","xw":"Sweet, neutral","gj":"Spleen, Stomach, Large Intestine","yj":"Moistens the bowels; caution with loose stools","prep":"Sprinkle directly on food","caut":"—","qinote":"Can't sprout once hulled","orgn":"—","trad":"Autumn","basis":"hulled","cat":"Nuts & seeds"}},{"zh":"巴旦木(扁桃仁)","en":"Almonds","cat":"坚果种子","basis":"生","n":{"kcal":579,"pro":21.2,"fib":12.5,"ca":269,"fe":3.7,"zn":3.1,"ala":null,"vc":0},"hi":"维生素E(25.6mg)、钙","xw":"甘，平(初稿)","gj":"肺、大肠(初稿)","yj":"注意与中药“苦杏仁”区分","prep":"可浸泡后食用","caut":"坚果过敏者避免","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"中","qinote":"美国生杏仁依法须巴氏杀菌，发芽力受影响","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Vitamin E (25.6 mg), calcium","xw":"Sweet, neutral (draft)","gj":"Lung, Large Intestine (draft)","yj":"Not the same as the herb 苦杏仁 (bitter apricot kernel)","prep":"Can be soaked before eating","caut":"Avoid with a nut allergy","qinote":"US raw almonds must be pasteurized by law, which reduces sprouting","orgn":"—","trad":"Autumn","basis":"raw","cat":"Nuts & seeds"}},{"zh":"羽衣甘蓝","en":"Kale","cat":"绿叶及十字花科","basis":"生","n":{"kcal":35,"pro":2.9,"fib":4.1,"ca":254,"fe":1.6,"zn":0.4,"ala":null,"vc":93.4},"hi":"低草酸钙、维C、维K","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"轻蒸或按摩生食","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"冬","fl":"11,12,1,2,3,4","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Low-oxalate calcium, vitamins C and K","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Steam lightly, or massage and eat raw","caut":"—","qinote":"Fresh leafy green; eat soon after picking","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Winter","basis":"raw","cat":"Greens & crucifers"}},{"zh":"小白菜/青江菜","en":"Bok choy","cat":"绿叶及十字花科","basis":"生","n":{"kcal":13,"pro":1.5,"fib":1.0,"ca":105,"fe":0.8,"zn":0.2,"ala":null,"vc":45.0},"hi":"低草酸钙、维C","xw":"甘，平(初稿)","gj":"肺、胃、大肠(初稿)","yj":"待东方组审核","prep":"快炒或焯水","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Low-oxalate calcium, vitamin C","xw":"Sweet, neutral (draft)","gj":"Lung, Stomach, Large Intestine (draft)","yj":"Pending Eastern review","prep":"Quick stir-fry or blanch","caut":"—","qinote":"Fresh leafy green; eat soon after picking","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"}},{"zh":"菠菜","en":"Spinach","cat":"绿叶及十字花科","basis":"生","n":{"kcal":23,"pro":2.9,"fib":2.2,"ca":99,"fe":2.7,"zn":0.5,"ala":null,"vc":28.1},"hi":"叶酸(194µg)、维K","xw":"甘，凉","gj":"肠、胃","yj":"脾虚便溏者少食","prep":"焯水可去部分草酸","caut":"草酸高，钙吸收率低；不宜作补钙主力","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"冬春","fl":"12,1,2,3","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Folate (194 µg), vitamin K","xw":"Sweet, cool","gj":"Intestines, Stomach","yj":"Eat less if digestion is weak with loose stools","prep":"Blanching removes some oxalate","caut":"High in oxalate, so little of its calcium is absorbed — not a main calcium source","qinote":"Fresh leafy green; eat soon after picking","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Winter–spring","basis":"raw","cat":"Greens & crucifers"}},{"zh":"芥兰","en":"Chinese broccoli (gai lan)","cat":"绿叶及十字花科","basis":"煮熟","n":{"kcal":22,"pro":1.1,"fib":2.5,"ca":100,"fe":0.6,"zn":0.4,"ala":null,"vc":28.2},"hi":"低草酸钙、维C","xw":"甘、辛，凉(初稿)","gj":"肝、肺(初稿)","yj":"待东方组审核","prep":"焯水或快炒","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Low-oxalate calcium, vitamin C","xw":"Sweet, pungent, cool (draft)","gj":"Liver, Lung (draft)","yj":"Pending Eastern review","prep":"Blanch or stir-fry","caut":"—","qinote":"Fresh leafy green; eat soon after picking","orgn":"—","trad":"Autumn–winter","basis":"cooked","cat":"Greens & crucifers"}},{"zh":"西洋菜","en":"Watercress","cat":"绿叶及十字花科","basis":"生","n":{"kcal":11,"pro":2.3,"fib":0.5,"ca":120,"fe":0.2,"zn":0.1,"ala":null,"vc":43.0},"hi":"钙、维C、维K","xw":"甘、微苦，寒","gj":"肺、膀胱(初稿)","yj":"清肺润燥；体寒者宜煲汤加姜","prep":"煲汤或快炒","caut":"需彻底清洗","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜水生蔬菜，现采现吃","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"水源须洁净","e":{"hi":"Calcium, vitamins C and K","xw":"Sweet, slightly bitter, cold","gj":"Lung, Bladder (draft)","yj":"Clears the lungs and moistens dryness; if you run cold, make soup with ginger","prep":"Make soup or stir-fry","caut":"Wash thoroughly","qinote":"Fresh aquatic vegetable; eat soon after picking","orgn":"The water it grows in must be clean","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"}},{"zh":"西兰花","en":"Broccoli","cat":"绿叶及十字花科","basis":"生","n":{"kcal":34,"pro":2.8,"fib":2.6,"ca":47,"fe":0.7,"zn":0.4,"ala":null,"vc":89.2},"hi":"维C、萝卜硫素","xw":"甘，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"切后静置几分钟再轻蒸，保留萝卜硫素","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜蔬菜；西兰花芽苗更具生命力","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Vitamin C, sulforaphane","xw":"Sweet, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Chop and let sit a few minutes before light steaming to keep sulforaphane","caut":"—","qinote":"Fresh vegetable; broccoli sprouts are even more vital","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"}},{"zh":"香菇(干)","en":"Shiitake, dried","cat":"菌菇","basis":"干","n":{"kcal":296,"pro":9.6,"fib":11.5,"ca":11,"fe":1.7,"zn":7.7,"ala":null,"vc":3.5},"hi":"锌、B族维生素；晒制可增加维生素D","xw":"甘，平","gj":"肝、胃","yj":"—","prep":"泡发后使用；烹前菌褶朝上晒太阳可提升维D","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"传统晒干；鲜香菇更带气","trad":"秋冬","fl":"全年(栽培)","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Zinc, B vitamins; sun-drying raises vitamin D","xw":"Sweet, neutral","gj":"Liver, Stomach","yj":"—","prep":"Rehydrate before use; set gills-up in sunlight before cooking to boost vitamin D","caut":"—","qinote":"Traditionally sun-dried; fresh shiitake carries more qi","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Autumn–winter","basis":"dried","cat":"Mushrooms"}},{"zh":"紫外线照射蘑菇","en":"Mushrooms, UV-exposed","cat":"菌菇","basis":"生","n":{"kcal":22,"pro":3.1,"fib":1.0,"ca":3,"fe":0.5,"zn":0.5,"ala":null,"vc":0},"hi":"维生素D重要植物来源(约26µg)","xw":"—","gj":"—","yj":"待东方组评估","prep":"选购标示“UV处理/维生素D”产品","caut":"维D含量因产品而异","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"中","qinote":"新鲜栽培菌菇","trad":"全年","fl":"全年(栽培)","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"A key plant source of vitamin D (about 26 µg)","xw":"—","gj":"—","yj":"To be assessed by the Eastern team","prep":"Buy products labeled “UV-treated” or “vitamin D”","caut":"Vitamin D varies by product","qinote":"Fresh cultivated mushroom","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Year-round","basis":"raw","cat":"Mushrooms"}},{"zh":"黑木耳(干)","en":"Wood ear, dried","cat":"菌菇","basis":"干","n":{"kcal":null,"pro":null,"fib":null,"ca":null,"fe":null,"zn":null,"ala":null,"vc":null},"hi":"膳食纤维、铁(数值待查)","xw":"甘，平","gj":"胃、大肠","yj":"有出血倾向者慎用","prep":"充分泡发，泡发后尽快食用","caut":"泡发过久(尤其室温)有米酵菌酸中毒风险","src":"待查《中国食物成分表》","color":"黑","whole":"完整","qi":"中","qinote":"传统干制","trad":"夏秋","fl":"全年(栽培)","orgp":"中","orgn":"—","e":{"hi":"Fiber, iron (values pending)","xw":"Sweet, neutral","gj":"Stomach, Large Intestine","yj":"Caution with a bleeding tendency","prep":"Rehydrate fully and use soon after","caut":"Soaking too long (especially at room temperature) risks bongkrekic acid poisoning","qinote":"Traditionally dried","orgn":"—","trad":"Summer–autumn","basis":"dried","cat":"Mushrooms"}},{"zh":"海带","en":"Kelp (kombu)","cat":"海藻","basis":"鲜","n":{"kcal":43,"pro":1.7,"fib":1.3,"ca":168,"fe":2.8,"zn":1.2,"ala":null,"vc":3.0},"hi":"碘极高、钙","xw":"咸，寒","gj":"肝、胃、肾","yj":"脾胃虚寒者慎用","prep":"煲汤后可弃去或少量食用","caut":"碘含量极高且波动大，需控制份量；甲状腺问题者咨询医生","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"干制海藻","trad":"夏","fl":"全年(干货)","orgp":"中","orgn":"留意产地水域重金属","e":{"hi":"Very high iodine, calcium","xw":"Salty, cold","gj":"Liver, Stomach, Kidney","yj":"Caution if digestion runs cold","prep":"Simmer in broth, then remove or eat only a little","caut":"Iodine is extremely high and variable — keep portions small; check with a doctor if you have thyroid issues","qinote":"Dried seaweed","orgn":"Check the waters it comes from (heavy metals)","trad":"Summer","basis":"fresh","cat":"Seaweeds"}},{"zh":"裙带菜","en":"Wakame","cat":"海藻","basis":"鲜","n":{"kcal":45,"pro":3.0,"fib":0.5,"ca":150,"fe":2.2,"zn":0.4,"ala":null,"vc":3.0},"hi":"碘、钙、镁","xw":"咸，寒(初稿)","gj":"肝、肾(初稿)","yj":"待东方组审核","prep":"泡发后凉拌或入汤","caut":"控制份量(碘)","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"干制或盐渍海藻","trad":"春","fl":"全年(干货)","orgp":"中","orgn":"留意产地水域","e":{"hi":"Iodine, calcium, magnesium","xw":"Salty, cold (draft)","gj":"Liver, Kidney (draft)","yj":"Pending Eastern review","prep":"Rehydrate, then use in salads or soup","caut":"Keep portions moderate (iodine)","qinote":"Dried or salted seaweed","orgn":"Check the source waters","trad":"Spring","basis":"fresh","cat":"Seaweeds"}},{"zh":"紫菜","en":"Nori (laver)","cat":"海藻","basis":"鲜","n":{"kcal":35,"pro":5.8,"fib":0.3,"ca":70,"fe":1.8,"zn":1.1,"ala":null,"vc":39.0},"hi":"碘、维C；含B12类似物(不可靠)","xw":"甘、咸，寒","gj":"肺","yj":"—","prep":"直接食用或入汤","caut":"不能作为B12可靠来源","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"干制海藻","trad":"冬春","fl":"全年(干货)","orgp":"中","orgn":"留意产地水域","e":{"hi":"Iodine, vitamin C; B12 analogues (unreliable)","xw":"Sweet, salty, cold","gj":"Lung","yj":"—","prep":"Eat as is or in soup","caut":"Not a reliable B12 source","qinote":"Dried seaweed","orgn":"Check the source waters","trad":"Winter–spring","basis":"fresh","cat":"Seaweeds"}},{"zh":"红薯","en":"Sweet potato","cat":"根茎","basis":"带皮烤","n":{"kcal":90,"pro":2.0,"fib":3.3,"ca":38,"fe":0.7,"zn":0.3,"ala":null,"vc":19.6},"hi":"β-胡萝卜素(维A 961µg RAE)","xw":"甘，平","gj":"脾、肾","yj":"—","prep":"带皮蒸烤；配少量油脂利于维A吸收","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜块根，可发芽","trad":"秋","fl":"8,9,10,11,12","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Beta-carotene (vitamin A 961 µg RAE)","xw":"Sweet, neutral","gj":"Spleen, Kidney","yj":"—","prep":"Steam or roast with the skin on; a little fat helps vitamin A absorption","caut":"—","qinote":"Fresh root; can sprout","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Autumn","basis":"baked with skin","cat":"Roots & tubers"}},{"zh":"山药","en":"Chinese yam","cat":"根茎","basis":"生","n":{"kcal":118,"pro":1.5,"fib":4.1,"ca":17,"fe":0.5,"zn":0.2,"ala":null,"vc":17.1},"hi":"钾；黏液质","xw":"甘，平","gj":"脾、肺、肾","yj":"药食同源；湿盛中满者慎用","prep":"去皮时戴手套(黏液可致皮肤痒)","caut":"数据为USDA通用薯蓣(yam)，与淮山品种可能不同","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"高","qinote":"新鲜块根","trad":"秋冬","fl":"待查(多为进口)","orgp":"中","orgn":"—","e":{"hi":"Potassium; mucilage","xw":"Sweet, neutral","gj":"Spleen, Lung, Kidney","yj":"Food-as-medicine; caution with heavy dampness and bloating","prep":"Wear gloves when peeling (the mucilage can itch)","caut":"USDA data is for generic yam and may differ from Chinese yam (淮山)","qinote":"Fresh root","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Roots & tubers"}},{"zh":"南瓜","en":"Pumpkin","cat":"根茎","basis":"生","n":{"kcal":26,"pro":1.0,"fib":0.5,"ca":21,"fe":0.8,"zn":0.3,"ala":null,"vc":9.0},"hi":"β-胡萝卜素","xw":"甘，温","gj":"脾、胃","yj":"—","prep":"蒸煮；配少量油脂","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜瓜果","trad":"秋","fl":"9,10,11,12","orgp":"中","orgn":"—","e":{"hi":"Beta-carotene","xw":"Sweet, warm","gj":"Spleen, Stomach","yj":"—","prep":"Steam or boil; add a little fat","caut":"—","qinote":"Fresh squash","orgn":"—","trad":"Autumn","basis":"raw","cat":"Roots & tubers"}},{"zh":"莲藕","en":"Lotus root","cat":"根茎","basis":"生","n":{"kcal":74,"pro":2.6,"fib":4.9,"ca":45,"fe":1.2,"zn":0.4,"ala":null,"vc":44.0},"hi":"维C、钾","xw":"生：甘，寒；熟：甘，温","gj":"心、脾、胃","yj":"生用清热，熟用健脾","prep":"生拌或煲汤","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"高","qinote":"新鲜根茎","trad":"秋冬","fl":"待查(多为进口)","orgp":"中","orgn":"水生作物，水源须洁净","e":{"hi":"Vitamin C, potassium","xw":"Raw: sweet, cold; cooked: sweet, warm","gj":"Heart, Spleen, Stomach","yj":"Raw clears heat; cooked strengthens the spleen","prep":"Eat raw in salads or simmer in soup","caut":"—","qinote":"Fresh root","orgn":"Aquatic crop — the water must be clean","trad":"Autumn–winter","basis":"raw","cat":"Roots & tubers"}},{"zh":"番石榴","en":"Guava","cat":"水果","basis":"生","n":{"kcal":68,"pro":2.6,"fib":5.4,"ca":18,"fe":0.3,"zn":0.2,"ala":null,"vc":228.3},"hi":"维C极高；迈阿密当地可得","xw":"甘、涩，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"连皮食用","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜水果，迈阿密本地可采","trad":"夏秋","fl":"6,7,8,9,10,11","orgp":"低","orgn":"—","e":{"hi":"Extremely high vitamin C; grown locally in Miami","xw":"Sweet, astringent, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Eat with the skin","caut":"—","qinote":"Fresh fruit, picked locally in Miami","orgn":"—","trad":"Summer–autumn","basis":"raw","cat":"Fruits"}},{"zh":"猕猴桃","en":"Kiwifruit","cat":"水果","basis":"生","n":{"kcal":61,"pro":1.1,"fib":3.0,"ca":34,"fe":0.3,"zn":0.1,"ala":null,"vc":92.7},"hi":"维C、维K","xw":"甘、酸，寒","gj":"胃、膀胱","yj":"脾胃虚寒者少食","prep":"与含铁餐同食","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜水果","trad":"秋","fl":"非本地(进口)","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Vitamins C and K","xw":"Sweet, sour, cold","gj":"Stomach, Bladder","yj":"Eat less if digestion runs cold","prep":"Eat with iron-rich meals","caut":"—","qinote":"Fresh fruit","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Autumn","basis":"raw","cat":"Fruits"}},{"zh":"橙","en":"Orange","cat":"水果","basis":"生","n":{"kcal":47,"pro":0.9,"fib":2.4,"ca":40,"fe":0.1,"zn":0.1,"ala":null,"vc":53.2},"hi":"维C、类黄酮","xw":"甘、酸，凉","gj":"肺、胃","yj":"—","prep":"与含铁餐同食","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜水果，佛州本地","trad":"冬","fl":"10,11,12,1,2,3,4,5,6","orgp":"中","orgn":"—","e":{"hi":"Vitamin C, flavonoids","xw":"Sweet, sour, cool","gj":"Lung, Stomach","yj":"—","prep":"Eat with iron-rich meals","caut":"—","qinote":"Fresh fruit, grown in Florida","orgn":"—","trad":"Winter","basis":"raw","cat":"Fruits"}},{"zh":"蓝莓","en":"Blueberries","cat":"水果","basis":"生","n":{"kcal":57,"pro":0.7,"fib":2.4,"ca":6,"fe":0.3,"zn":0.2,"ala":null,"vc":9.7},"hi":"花青素","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"鲜食或冷冻","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"新鲜浆果，佛州春季产","trad":"夏","fl":"3,4,5","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Anthocyanins","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Fresh or frozen","caut":"—","qinote":"Fresh berries; Florida's crop comes in spring","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Summer","basis":"raw","cat":"Fruits"}},{"zh":"枸杞子(干)","en":"Goji berries, dried","cat":"药食同源","basis":"干","n":{"kcal":349,"pro":14.3,"fib":13.0,"ca":190,"fe":6.8,"zn":null,"ala":null,"vc":48.4},"hi":"维A(类胡萝卜素)、维C","xw":"甘，平","gj":"肝、肾","yj":"外感发热、脾虚泄泻者慎用","prep":"泡水、入粥或直接食用","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"中","qinote":"传统晒干","trad":"夏秋","fl":"全年(干货)","orgp":"高","orgn":"进口枸杞农残、硫熏问题较多，优先有机认证","e":{"hi":"Vitamin A (carotenoids), vitamin C","xw":"Sweet, neutral","gj":"Liver, Kidney","yj":"Caution with a fever from a cold, or loose stools","prep":"Steep in hot water, add to congee, or eat as is","caut":"—","qinote":"Traditionally sun-dried","orgn":"Imported goji often has pesticide or sulfur-fumigation problems — prefer certified organic","trad":"Summer–autumn","basis":"dried","cat":"Food-as-medicine"}},{"zh":"红枣(干)","en":"Jujube, dried","cat":"药食同源","basis":"干","n":{"kcal":287,"pro":3.7,"fib":null,"ca":79,"fe":1.8,"zn":0.5,"ala":null,"vc":13.0},"hi":"钾","xw":"甘，温","gj":"脾、胃","yj":"湿盛、齿病者慎用","prep":"去核入粥或煲汤","caut":"含糖较高，控制份量","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"中","qinote":"传统晒干","trad":"秋","fl":"全年(干货)","orgp":"中","orgn":"—","e":{"hi":"Potassium","xw":"Sweet, warm","gj":"Spleen, Stomach","yj":"Caution with heavy dampness or dental problems","prep":"Pit and add to congee or soup","caut":"Fairly high in sugar — keep portions small","qinote":"Traditionally sun-dried","orgn":"—","trad":"Autumn","basis":"dried","cat":"Food-as-medicine"}},{"zh":"生姜","en":"Ginger","cat":"药食同源","basis":"生","n":{"kcal":80,"pro":1.8,"fib":2.0,"ca":16,"fe":0.6,"zn":0.3,"ala":null,"vc":5.0},"hi":"姜辣素","xw":"辛，微温","gj":"肺、脾、胃","yj":"阴虚内热者慎用","prep":"可平衡寒性食材(如绿豆、海带)","caut":"姜不属五辛，适合纯净素","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜根茎，可发芽","trad":"夏秋(新姜)","fl":"全年","orgp":"中","orgn":"—","e":{"hi":"Gingerols","xw":"Pungent, slightly warm","gj":"Lung, Spleen, Stomach","yj":"Caution with yin-deficiency heat","prep":"Balances cooling foods such as mung beans and kelp","caut":"Ginger is not one of the five pungents (五辛), so it suits a pure plant-based diet","qinote":"Fresh root; can sprout","orgn":"—","trad":"Summer–autumn (young ginger)","basis":"raw","cat":"Food-as-medicine"}},{"zh":"莲子(干)","en":"Lotus seeds, dried","cat":"药食同源","basis":"干","n":{"kcal":332,"pro":15.4,"fib":null,"ca":163,"fe":3.5,"zn":1.1,"ala":null,"vc":0},"hi":"蛋白、钾、镁","xw":"甘、涩，平","gj":"脾、肾、心","yj":"大便燥结者慎用","prep":"浸泡后煮","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"中","qinote":"干制；带芯莲子可发芽","trad":"夏秋","fl":"全年(干货)","orgp":"中","orgn":"—","e":{"hi":"Protein, potassium, magnesium","xw":"Sweet, astringent, neutral","gj":"Spleen, Kidney, Heart","yj":"Caution with dry, hard stools","prep":"Soak before cooking","caut":"—","qinote":"Dried; seeds with the germ can still sprout","orgn":"—","trad":"Summer–autumn","basis":"dried","cat":"Food-as-medicine"}},{"zh":"薏苡仁/薏米","en":"Job's tears (coix)","cat":"药食同源","basis":"干","n":{"kcal":null,"pro":null,"fib":null,"ca":null,"fe":null,"zn":null,"ala":null,"vc":null},"hi":"数值待查","xw":"甘、淡，凉","gj":"脾、胃、肺","yj":"孕妇慎用","prep":"浸泡后煮；可炒制减寒性","caut":"—","src":"待查《中国食物成分表》","color":"白","whole":"完整","qi":"中","qinote":"去壳后发芽力弱","trad":"秋","fl":"全年(干货)","orgp":"中","orgn":"—","e":{"hi":"Values pending","xw":"Sweet, bland, cool","gj":"Spleen, Stomach, Lung","yj":"Use with caution in pregnancy","prep":"Soak before cooking; dry-roasting tempers its cooling nature","caut":"—","qinote":"Sprouts poorly once hulled","orgn":"—","trad":"Autumn","basis":"dried","cat":"Food-as-medicine"}},{"zh":"营养酵母(强化)","en":"Nutritional yeast, fortified","cat":"其他","basis":"干","n":{"kcal":null,"pro":null,"fib":null,"ca":null,"fe":null,"zn":null,"ala":null,"vc":null},"hi":"部分产品强化B12；各品牌差异大","xw":"—","gj":"—","yj":"待东方组评估","prep":"撒于菜肴","caut":"按标签核实B12含量；不可替代B12补充剂的稳定性","src":"产品标签","color":"黄","whole":"加工","qi":"低","qinote":"工业加工制品，作为B12强化来源","trad":"—","fl":"全年","orgp":"低","orgn":"—","e":{"hi":"Some products are fortified with B12; brands vary widely","xw":"—","gj":"—","yj":"To be assessed by the Eastern team","prep":"Sprinkle on dishes","caut":"Check B12 on the label; not as reliable as a B12 supplement","qinote":"Industrially processed; used as a B12-fortified source","orgn":"—","trad":"—","basis":"dried","cat":"Other"}},{"zh":"番茄","en":"Tomato","cat":"果菜","basis":"生","n":{"kcal":18,"pro":0.9,"fib":1.2,"ca":10,"fe":0.3,"zn":0.2,"ala":null,"vc":13.7},"hi":"番茄红素(烹调加油后更易吸收)","xw":"甘、酸，微寒","gj":"肝、胃","yj":"脾胃虚寒者不宜多生食","prep":"加少量油烹调，番茄红素吸收更好","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜果菜，佛州冬春产","trad":"夏","fl":"10,11,12,1,2,3,4,5,6","orgp":"中","orgn":"—","e":{"hi":"Lycopene (better absorbed when cooked with oil)","xw":"Sweet, sour, slightly cold","gj":"Liver, Stomach","yj":"Not too much raw if digestion runs cold","prep":"Cook with a little oil for better lycopene absorption","caut":"—","qinote":"Fresh; Florida's crop comes in winter–spring","orgn":"—","trad":"Summer","basis":"raw","cat":"Fruiting vegetables"}},{"zh":"红甜椒","en":"Red bell pepper","cat":"果菜","basis":"生","n":{"kcal":31,"pro":1.0,"fib":2.1,"ca":7,"fe":0.4,"zn":0.3,"ala":null,"vc":127.7},"hi":"维C极高、维A","xw":"甘，温(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"生食保留维C；与豆类同餐助铁吸收","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜果菜，佛州冬春产","trad":"夏","fl":"11,12,1,2,3,4,5","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Very high vitamin C, vitamin A","xw":"Sweet, warm (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Eat raw to keep vitamin C; pair with beans to help iron absorption","caut":"—","qinote":"Fresh; Florida's crop comes in winter–spring","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Summer","basis":"raw","cat":"Fruiting vegetables"}},{"zh":"甜菜根","en":"Beetroot","cat":"根茎","basis":"生","n":{"kcal":43,"pro":1.6,"fib":2.8,"ca":16,"fe":0.8,"zn":0.4,"ala":null,"vc":4.9},"hi":"叶酸(109µg)、天然硝酸盐","xw":"甘，平(初稿)","gj":"心、肝(初稿)","yj":"待东方组审核","prep":"生刨丝或烤","caut":"草酸偏高","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜块根；甜菜叶亦可食","trad":"秋冬","fl":"12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Folate (109 µg), natural nitrates","xw":"Sweet, neutral (draft)","gj":"Heart, Liver (draft)","yj":"Pending Eastern review","prep":"Grate raw or roast","caut":"Fairly high in oxalate","qinote":"Fresh root; the greens are edible too","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Roots & tubers"}},{"zh":"胡萝卜","en":"Carrot","cat":"根茎","basis":"生","n":{"kcal":41,"pro":0.9,"fib":2.8,"ca":33,"fe":0.3,"zn":0.2,"ala":null,"vc":5.9},"hi":"β-胡萝卜素(维A 835µg RAE)","xw":"甘，平","gj":"肺、脾","yj":"—","prep":"配少量油脂烹调利于维A吸收","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜块根","trad":"冬","fl":"11,12,1,2,3,4,5","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Beta-carotene (vitamin A 835 µg RAE)","xw":"Sweet, neutral","gj":"Lung, Spleen","yj":"—","prep":"Cook with a little fat for vitamin A","caut":"—","qinote":"Fresh root","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Winter","basis":"raw","cat":"Roots & tubers"}},{"zh":"紫甘蓝","en":"Red cabbage","cat":"绿叶及十字花科","basis":"生","n":{"kcal":31,"pro":1.4,"fib":2.1,"ca":45,"fe":0.8,"zn":0.2,"ala":null,"vc":57.0},"hi":"花青素、维C","xw":"甘，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"生拌或快炒；加醋颜色更鲜","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"新鲜蔬菜(紫色归入黑/水，初稿)","trad":"秋冬","fl":"11,12,1,2,3,4,5","orgp":"低","orgn":"甘蓝类常在EWG“农残最少”榜单","e":{"hi":"Anthocyanins, vitamin C","xw":"Sweet, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Raw in salads or a quick stir-fry; a splash of vinegar brightens the color","caut":"—","qinote":"Fresh vegetable (purple grouped with black / Water, draft)","orgn":"Cabbages are often on EWG's Clean Fifteen","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"}}];
-const TH = {pro:8, fe:2, zn:1.5, ca:100, ala:0.5, vc:30};
+const FOODS = [{"zh":"小扁豆","en":"Lentils","cat":"豆类","basis":"煮熟","n":{"kcal":116,"pro":9.0,"fib":7.9,"ca":19,"fe":3.3,"zn":1.3,"ala":null,"vc":1.5},"hi":"叶酸丰富(181µg)","xw":"传统典籍少记载","gj":"—","yj":"待东方组评估","prep":"无需长时间浸泡，煮15–20分钟即可","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽；发芽后更具生命力","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Rich in folate (181 µg)","xw":"Rarely recorded in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"No long soak needed; simmer 15–20 min","caut":"—","qinote":"Living seed, can be sprouted; sprouting adds vitality","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":"兵豆 · lentils"},{"zh":"鹰嘴豆","en":"Chickpeas","cat":"豆类","basis":"煮熟","n":{"kcal":164,"pro":8.9,"fib":7.6,"ca":49,"fe":2.9,"zn":1.5,"ala":null,"vc":1.3},"hi":"叶酸、锰","xw":"甘，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"浸泡8–12小时后煮，可降低植酸、减少胀气","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Folate, manganese","xw":"Sweet, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Soak 8–12 h before cooking to cut phytates and gas","caut":"—","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":""},{"zh":"黄豆","en":"Soybeans","cat":"豆类","basis":"煮熟","n":{"kcal":172,"pro":18.2,"fib":6.0,"ca":102,"fe":5.1,"zn":1.2,"ala":0.6,"vc":1.7},"hi":"完全蛋白；含ALA","xw":"甘，平","gj":"脾、大肠","yj":"脾胃虚寒者不宜过量","prep":"浸泡后煮透；发芽或发酵可提高矿物质吸收","caut":"需充分煮熟，生豆含抗营养因子","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽(黄豆芽)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"高","orgn":"美国大豆多为转基因，须选有机或认证非转基因","e":{"hi":"Complete protein; contains ALA","xw":"Sweet, neutral","gj":"Spleen, Large Intestine","yj":"Not in excess if digestion runs cold and weak","prep":"Soak, then cook thoroughly; sprouting or fermenting improves mineral absorption","caut":"Must be fully cooked; raw beans contain anti-nutrients","qinote":"Living seed, can be sprouted (soybean sprouts)","orgn":"Most US soy is GMO — buy organic or certified non-GMO","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":""},{"zh":"北豆腐(钙凝固)","en":"Tofu, firm (calcium-set)","cat":"豆类","basis":"生，钙盐凝固","n":{"kcal":144,"pro":17.3,"fib":2.3,"ca":683,"fe":2.7,"zn":1.6,"ala":0.6,"vc":0.2},"hi":"钙质主要来源之一(视凝固剂)","xw":"甘，凉","gj":"脾、胃、大肠","yj":"脾胃虚寒者宜热食","prep":"选用以硫酸钙/氯化镁凝固者，查看标签","caut":"钙含量因凝固剂差异很大","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"轻加工","qi":"低","qinote":"加工制品；宜选当天新鲜制作","trad":"全年","fl":"全年(耐储)","orgp":"高","orgn":"原料黄豆须有机或非转基因","e":{"hi":"A key calcium source (depends on the coagulant)","xw":"Sweet, cool","gj":"Spleen, Stomach, Large Intestine","yj":"Eat it warm if digestion runs cold","prep":"Choose tofu set with calcium sulfate or magnesium chloride; check the label","caut":"Calcium varies widely with the coagulant","qinote":"Processed food; choose freshly made","orgn":"Soybeans must be organic or non-GMO","trad":"Year-round","basis":"raw, calcium-set","cat":"Legumes"},"serv":{"g":100,"zh":"100克","en":"100 g"},"stage":3,"alias":"老豆腐 · firm tofu"},{"zh":"毛豆","en":"Edamame","cat":"豆类","basis":"煮熟","n":{"kcal":121,"pro":11.9,"fib":5.2,"ca":63,"fe":2.3,"zn":1.4,"ala":0.4,"vc":6.1},"hi":"叶酸极丰富(311µg)","xw":"甘，平(初稿)","gj":"脾、大肠(初稿)","yj":"待东方组审核","prep":"沸水煮5分钟","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜豆荚，现采现煮","trad":"夏","fl":"待查","orgp":"高","orgn":"须有机或非转基因","e":{"hi":"Very rich in folate (311 µg)","xw":"Sweet, neutral (draft)","gj":"Spleen, Large Intestine (draft)","yj":"Pending Eastern review","prep":"Boil for 5 minutes","caut":"—","qinote":"Fresh pods; cook soon after picking","orgn":"Must be organic or non-GMO","trad":"Summer","basis":"cooked","cat":"Legumes"},"serv":{"g":80,"zh":"½杯","en":"½ cup"},"stage":3,"alias":"枝豆 · edamame"},{"zh":"赤小豆/红豆","en":"Adzuki beans","cat":"豆类","basis":"煮熟","n":{"kcal":128,"pro":7.5,"fib":7.3,"ca":28,"fe":2.0,"zn":1.8,"ala":null,"vc":0},"hi":"钾、叶酸","xw":"甘、酸，平","gj":"心、小肠","yj":"利水消肿；体瘦津亏者慎多食","prep":"浸泡4–8小时后煮","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Potassium, folate","xw":"Sweet, sour, neutral","gj":"Heart, Small Intestine","yj":"Drains dampness and reduces swelling; go easy if thin or dry","prep":"Soak 4–8 h before cooking","caut":"—","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":"红豆 · adzuki"},{"zh":"绿豆","en":"Mung beans","cat":"豆类","basis":"煮熟","n":{"kcal":105,"pro":7.0,"fib":7.6,"ca":27,"fe":1.4,"zn":0.8,"ala":null,"vc":1.0},"hi":"叶酸；发芽后维C上升","xw":"甘，寒","gj":"心、胃","yj":"清热解暑；脾胃虚寒者慎用","prep":"浸泡或发芽(绿豆芽)","caut":"寒性较强，冬季及体寒者少量","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"活种子，发芽(绿豆芽)最具生命力","trad":"夏","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Folate; vitamin C rises when sprouted","xw":"Sweet, cold","gj":"Heart, Stomach","yj":"Clears summer heat; caution if digestion runs cold","prep":"Soak, or sprout into mung bean sprouts","caut":"Strongly cooling — small amounts in winter or for cold constitutions","qinote":"Living seed; sprouts are its most vital form","orgn":"—","trad":"Summer","basis":"cooked","cat":"Legumes"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":""},{"zh":"黑豆(黑芸豆)","en":"Black beans","cat":"豆类","basis":"煮熟","n":{"kcal":132,"pro":8.9,"fib":8.7,"ca":27,"fe":2.1,"zn":1.1,"ala":null,"vc":0},"hi":"花青素(种皮)、叶酸","xw":"甘，平(按黑豆，初稿)","gj":"脾、肾(初稿)","yj":"注意：中医“黑豆”多指黑大豆，与黑芸豆不同，待东方组区分","prep":"浸泡8–12小时后煮","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Anthocyanins (in the skin), folate","xw":"Sweet, neutral (as black soybean, draft)","gj":"Spleen, Kidney (draft)","yj":"Note: in TCM 黑豆 usually means black soybean, not black turtle bean — Eastern team to clarify","prep":"Soak 8–12 h before cooking","caut":"—","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Legumes"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":""},{"zh":"藜麦","en":"Quinoa","cat":"全谷","basis":"煮熟","n":{"kcal":120,"pro":4.4,"fib":2.8,"ca":17,"fe":1.5,"zn":1.1,"ala":null,"vc":0},"hi":"完全蛋白、镁","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"煮前冲洗去皂苷","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"有多色品种(红、黑)，可丰富五色","e":{"hi":"Complete protein, magnesium","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Rinse well before cooking to remove saponins","caut":"—","qinote":"Living seed, can be sprouted","orgn":"Red and black varieties add more of the five colors","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":2,"alias":""},{"zh":"燕麦(燕麦片)","en":"Oats","cat":"全谷","basis":"干重","n":{"kcal":379,"pro":13.2,"fib":10.1,"ca":52,"fe":4.3,"zn":3.6,"ala":null,"vc":0},"hi":"β-葡聚糖","xw":"甘，平","gj":"脾、胃、肝","yj":"—","prep":"可隔夜浸泡","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"轻加工","qi":"中","qinote":"压片后不能发芽；可改选燕麦米(oat groats)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"高","orgn":"常规燕麦草甘膦残留较常见，优先有机","e":{"hi":"Beta-glucan","xw":"Sweet, neutral","gj":"Spleen, Stomach, Liver","yj":"—","prep":"Can be soaked overnight","caut":"—","qinote":"Rolled oats can't sprout; choose oat groats for that","orgn":"Conventional oats often carry glyphosate residue — prefer organic","trad":"Autumn harvest · stores well","basis":"dry","cat":"Whole grains"},"serv":{"g":40,"zh":"40克干","en":"40 g dry"},"stage":2,"alias":"oatmeal"},{"zh":"糙米","en":"Brown rice","cat":"全谷","basis":"煮熟","n":{"kcal":123,"pro":2.7,"fib":1.6,"ca":3,"fe":0.6,"zn":0.7,"ala":null,"vc":0},"hi":"镁、B族维生素","xw":"甘，平","gj":"脾、胃","yj":"—","prep":"浸泡数小时后煮，口感更软","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子，可发芽(发芽糙米)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"留意砷：多水煮后沥水；产地选择比有机更重要","e":{"hi":"Magnesium, B vitamins","xw":"Sweet, neutral","gj":"Spleen, Stomach","yj":"—","prep":"Soak a few hours for a softer texture","caut":"—","qinote":"Living seed, can be sprouted (germinated brown rice)","orgn":"Watch arsenic: cook in extra water and drain; origin matters more than organic","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":""},{"zh":"小米","en":"Millet","cat":"全谷","basis":"煮熟","n":{"kcal":119,"pro":3.5,"fib":1.3,"ca":3,"fe":0.6,"zn":0.9,"ala":null,"vc":0},"hi":"镁、磷","xw":"甘、咸，凉","gj":"脾、胃、肾","yj":"健脾和胃","prep":"适合煮粥","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"中","qinote":"去壳后发芽力弱","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Magnesium, phosphorus","xw":"Sweet, salty, cool","gj":"Spleen, Stomach, Kidney","yj":"Strengthens the spleen and settles the stomach","prep":"Ideal for congee","caut":"—","qinote":"Sprouts poorly once hulled","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":2,"alias":""},{"zh":"荞麦","en":"Buckwheat groats","cat":"全谷","basis":"煮熟","n":{"kcal":92,"pro":3.4,"fib":2.7,"ca":7,"fe":0.8,"zn":0.6,"ala":null,"vc":0},"hi":"芦丁、镁","xw":"甘，凉","gj":"脾、胃、大肠","yj":"脾胃虚寒者不宜多食","prep":"可烘烤后煮，香气更好","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"生荞麦粒可发芽(选未烘烤的)","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Rutin, magnesium","xw":"Sweet, cool","gj":"Spleen, Stomach, Large Intestine","yj":"Not too much if digestion runs cold","prep":"Toast before cooking for more aroma","caut":"—","qinote":"Raw (untoasted) groats can sprout","orgn":"—","trad":"Autumn harvest · stores well","basis":"cooked","cat":"Whole grains"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":2,"alias":""},{"zh":"大麦(去壳)","en":"Barley, pearled","cat":"全谷","basis":"煮熟","n":{"kcal":123,"pro":2.3,"fib":3.8,"ca":11,"fe":1.3,"zn":0.8,"ala":null,"vc":0},"hi":"β-葡聚糖","xw":"甘、咸，凉","gj":"脾、胃","yj":"—","prep":"浸泡后煮","caut":"含麸质","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"轻加工","qi":"低","qinote":"珍珠麦已去麸，不能发芽；建议改选去壳大麦(hulled)","trad":"夏收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Beta-glucan","xw":"Sweet, salty, cool","gj":"Spleen, Stomach","yj":"—","prep":"Soak before cooking","caut":"Contains gluten","qinote":"Pearled barley has lost its bran and can't sprout — choose hulled barley","orgn":"—","trad":"Summer harvest · stores well","basis":"cooked","cat":"Whole grains"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":1,"alias":""},{"zh":"亚麻籽","en":"Flaxseed","cat":"坚果种子","basis":"干","n":{"kcal":534,"pro":18.3,"fib":27.3,"ca":255,"fe":5.7,"zn":4.3,"ala":22.8,"vc":0.6},"hi":"ALA最丰富来源之一；木酚素","xw":"传统典籍少记载(胡麻类)","gj":"—","yj":"待东方组评估","prep":"需磨碎才能吸收；磨粉后冷藏","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"活种子；整粒保存，食用前现磨","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"One of the richest ALA sources; lignans","xw":"Rarely recorded in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Must be ground to be absorbed; refrigerate once ground","caut":"—","qinote":"Living seed; store whole and grind just before eating","orgn":"—","trad":"Autumn harvest · stores well","basis":"dried","cat":"Nuts & seeds"},"serv":{"g":7,"zh":"1汤匙磨碎","en":"1 tbsp ground"},"stage":5,"alias":""},{"zh":"奇亚籽","en":"Chia seeds","cat":"坚果种子","basis":"干","n":{"kcal":486,"pro":16.5,"fib":34.4,"ca":631,"fe":7.7,"zn":4.6,"ala":17.8,"vc":1.6},"hi":"ALA、钙、可溶性纤维","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"浸泡成凝胶后食用","caut":"需配足够水分","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"活种子，可发芽","trad":"耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"ALA, calcium, soluble fiber","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Soak into a gel before eating","caut":"Drink enough water with it","qinote":"Living seed, can be sprouted","orgn":"—","trad":"Stores well","basis":"dried","cat":"Nuts & seeds"},"serv":{"g":12,"zh":"1汤匙","en":"1 tbsp"},"stage":5,"alias":""},{"zh":"核桃","en":"Walnuts","cat":"坚果种子","basis":"生","n":{"kcal":654,"pro":15.2,"fib":6.7,"ca":98,"fe":2.9,"zn":3.1,"ala":9.1,"vc":1.3},"hi":"ALA最丰富坚果","xw":"甘，温","gj":"肾、肺、大肠","yj":"痰热、腹泻者慎用","prep":"生食或低温烘烤","caut":"坚果过敏者避免","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"中","qinote":"去壳后生命力渐弱；带壳保存、现剥更佳","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"The highest-ALA nut","xw":"Sweet, warm","gj":"Kidney, Lung, Large Intestine","yj":"Caution with phlegm-heat or loose stools","prep":"Eat raw or lightly toasted","caut":"Avoid with a nut allergy","qinote":"Vitality fades after shelling; store in the shell and crack fresh","orgn":"—","trad":"Autumn","basis":"raw","cat":"Nuts & seeds"},"serv":{"g":30,"zh":"一小把(30克)","en":"small handful (30 g)"},"stage":5,"alias":""},{"zh":"黑芝麻","en":"Black sesame (whole)","cat":"坚果种子","basis":"干，整粒","n":{"kcal":573,"pro":17.7,"fib":11.8,"ca":975,"fe":14.6,"zn":7.8,"ala":null,"vc":0},"hi":"钙、铁、锌均高","xw":"甘，平","gj":"肝、肾、大肠","yj":"便溏者慎用","prep":"炒香后磨碎吸收更好(整粒难消化)","caut":"数据为带皮芝麻","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"整粒活种子；现炒现磨","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"High in calcium, iron and zinc","xw":"Sweet, neutral","gj":"Liver, Kidney, Large Intestine","yj":"Caution with loose stools","prep":"Toast and grind for better absorption (whole seeds pass undigested)","caut":"Figures are for unhulled seeds","qinote":"Whole living seed; toast and grind fresh","orgn":"—","trad":"Autumn","basis":"dried, whole","cat":"Nuts & seeds"},"serv":{"g":9,"zh":"1汤匙","en":"1 tbsp"},"stage":5,"alias":""},{"zh":"南瓜籽仁","en":"Pumpkin seeds","cat":"坚果种子","basis":"干","n":{"kcal":559,"pro":30.2,"fib":6.0,"ca":46,"fe":8.8,"zn":7.8,"ala":null,"vc":1.9},"hi":"锌、镁极丰富(镁592mg)","xw":"甘，平(初稿)","gj":"大肠(初稿)","yj":"待东方组审核","prep":"生食或低温烘烤","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"中","qinote":"去壳生籽，部分可发芽","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Very rich in zinc and magnesium (592 mg)","xw":"Sweet, neutral (draft)","gj":"Large Intestine (draft)","yj":"Pending Eastern review","prep":"Eat raw or lightly toasted","caut":"—","qinote":"Hulled raw seeds; some can sprout","orgn":"—","trad":"Autumn","basis":"dried","cat":"Nuts & seeds"},"serv":{"g":30,"zh":"一小把(30克)","en":"small handful (30 g)"},"stage":5,"alias":"pepitas"},{"zh":"火麻仁","en":"Hemp seeds, hulled","cat":"坚果种子","basis":"去壳","n":{"kcal":553,"pro":31.6,"fib":4.0,"ca":70,"fe":8.0,"zn":9.9,"ala":8.7,"vc":0.5},"hi":"蛋白、锌、ALA","xw":"甘，平","gj":"脾、胃、大肠","yj":"润肠通便；便溏者慎用","prep":"直接撒于食物","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"轻加工","qi":"低","qinote":"去壳后不能发芽","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Protein, zinc, ALA","xw":"Sweet, neutral","gj":"Spleen, Stomach, Large Intestine","yj":"Moistens the bowels; caution with loose stools","prep":"Sprinkle directly on food","caut":"—","qinote":"Can't sprout once hulled","orgn":"—","trad":"Autumn","basis":"hulled","cat":"Nuts & seeds"},"serv":{"g":30,"zh":"3汤匙","en":"3 tbsp"},"stage":5,"alias":"麻仁 · hemp hearts"},{"zh":"巴旦木(扁桃仁)","en":"Almonds","cat":"坚果种子","basis":"生","n":{"kcal":579,"pro":21.2,"fib":12.5,"ca":269,"fe":3.7,"zn":3.1,"ala":null,"vc":0},"hi":"维生素E(25.6mg)、钙","xw":"甘，平(初稿)","gj":"肺、大肠(初稿)","yj":"注意与中药“苦杏仁”区分","prep":"可浸泡后食用","caut":"坚果过敏者避免","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"中","qinote":"美国生杏仁依法须巴氏杀菌，发芽力受影响","trad":"秋","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Vitamin E (25.6 mg), calcium","xw":"Sweet, neutral (draft)","gj":"Lung, Large Intestine (draft)","yj":"Not the same as the herb 苦杏仁 (bitter apricot kernel)","prep":"Can be soaked before eating","caut":"Avoid with a nut allergy","qinote":"US raw almonds must be pasteurized by law, which reduces sprouting","orgn":"—","trad":"Autumn","basis":"raw","cat":"Nuts & seeds"},"serv":{"g":30,"zh":"一小把(30克)","en":"small handful (30 g)"},"stage":5,"alias":"美国大杏仁 · almond"},{"zh":"羽衣甘蓝","en":"Kale","cat":"绿叶及十字花科","basis":"生","n":{"kcal":35,"pro":2.9,"fib":4.1,"ca":254,"fe":1.6,"zn":0.4,"ala":null,"vc":93.4},"hi":"低草酸钙、维C、维K","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"轻蒸或按摩生食","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"冬","fl":"11,12,1,2,3,4","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Low-oxalate calcium, vitamins C and K","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Steam lightly, or massage and eat raw","caut":"—","qinote":"Fresh leafy green; eat soon after picking","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Winter","basis":"raw","cat":"Greens & crucifers"},"serv":{"g":60,"zh":"1杯生","en":"1 cup raw"},"stage":4,"alias":"kale"},{"zh":"小白菜/青江菜","en":"Bok choy","cat":"绿叶及十字花科","basis":"生","n":{"kcal":13,"pro":1.5,"fib":1.0,"ca":105,"fe":0.8,"zn":0.2,"ala":null,"vc":45.0},"hi":"低草酸钙、维C","xw":"甘，平(初稿)","gj":"肺、胃、大肠(初稿)","yj":"待东方组审核","prep":"快炒或焯水","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Low-oxalate calcium, vitamin C","xw":"Sweet, neutral (draft)","gj":"Lung, Stomach, Large Intestine (draft)","yj":"Pending Eastern review","prep":"Quick stir-fry or blanch","caut":"—","qinote":"Fresh leafy green; eat soon after picking","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"},"serv":{"g":60,"zh":"1杯生","en":"1 cup raw"},"stage":4,"alias":"上海青 · 白菜仔 · bok choy · pak choi"},{"zh":"菠菜","en":"Spinach","cat":"绿叶及十字花科","basis":"生","n":{"kcal":23,"pro":2.9,"fib":2.2,"ca":99,"fe":2.7,"zn":0.5,"ala":null,"vc":28.1},"hi":"叶酸(194µg)、维K","xw":"甘，凉","gj":"肠、胃","yj":"脾虚便溏者少食","prep":"焯水可去部分草酸","caut":"草酸高，钙吸收率低；不宜作补钙主力","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"冬春","fl":"12,1,2,3","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Folate (194 µg), vitamin K","xw":"Sweet, cool","gj":"Intestines, Stomach","yj":"Eat less if digestion is weak with loose stools","prep":"Blanching removes some oxalate","caut":"High in oxalate, so little of its calcium is absorbed — not a main calcium source","qinote":"Fresh leafy green; eat soon after picking","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Winter–spring","basis":"raw","cat":"Greens & crucifers"},"serv":{"g":60,"zh":"1杯生","en":"1 cup raw"},"stage":4,"alias":""},{"zh":"芥兰","en":"Chinese broccoli (gai lan)","cat":"绿叶及十字花科","basis":"煮熟","n":{"kcal":22,"pro":1.1,"fib":2.5,"ca":100,"fe":0.6,"zn":0.4,"ala":null,"vc":28.2},"hi":"低草酸钙、维C","xw":"甘、辛，凉(初稿)","gj":"肝、肺(初稿)","yj":"待东方组审核","prep":"焯水或快炒","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜叶菜，现采现吃","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Low-oxalate calcium, vitamin C","xw":"Sweet, pungent, cool (draft)","gj":"Liver, Lung (draft)","yj":"Pending Eastern review","prep":"Blanch or stir-fry","caut":"—","qinote":"Fresh leafy green; eat soon after picking","orgn":"—","trad":"Autumn–winter","basis":"cooked","cat":"Greens & crucifers"},"serv":{"g":90,"zh":"½杯熟","en":"½ cup cooked"},"stage":4,"alias":"芥蓝 · gai lan · Chinese kale"},{"zh":"西洋菜","en":"Watercress","cat":"绿叶及十字花科","basis":"生","n":{"kcal":11,"pro":2.3,"fib":0.5,"ca":120,"fe":0.2,"zn":0.1,"ala":null,"vc":43.0},"hi":"钙、维C、维K","xw":"甘、微苦，寒","gj":"肺、膀胱(初稿)","yj":"清肺润燥；体寒者宜煲汤加姜","prep":"煲汤或快炒","caut":"需彻底清洗","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜水生蔬菜，现采现吃","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"水源须洁净","e":{"hi":"Calcium, vitamins C and K","xw":"Sweet, slightly bitter, cold","gj":"Lung, Bladder (draft)","yj":"Clears the lungs and moistens dryness; if you run cold, make soup with ginger","prep":"Make soup or stir-fry","caut":"Wash thoroughly","qinote":"Fresh aquatic vegetable; eat soon after picking","orgn":"The water it grows in must be clean","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"},"serv":{"g":60,"zh":"1杯生","en":"1 cup raw"},"stage":4,"alias":"豆瓣菜 · watercress"},{"zh":"西兰花","en":"Broccoli","cat":"绿叶及十字花科","basis":"生","n":{"kcal":34,"pro":2.8,"fib":2.6,"ca":47,"fe":0.7,"zn":0.4,"ala":null,"vc":89.2},"hi":"维C、萝卜硫素","xw":"甘，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"切后静置几分钟再轻蒸，保留萝卜硫素","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜蔬菜；西兰花芽苗更具生命力","trad":"秋冬","fl":"11,12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Vitamin C, sulforaphane","xw":"Sweet, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Chop and let sit a few minutes before light steaming to keep sulforaphane","caut":"—","qinote":"Fresh vegetable; broccoli sprouts are even more vital","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"},"serv":{"g":80,"zh":"½杯","en":"½ cup"},"stage":3,"alias":"绿花椰菜 · broccoli"},{"zh":"香菇(干)","en":"Shiitake, dried","cat":"菌菇","basis":"干","n":{"kcal":296,"pro":9.6,"fib":11.5,"ca":11,"fe":1.7,"zn":7.7,"ala":null,"vc":3.5},"hi":"锌、B族维生素；晒制可增加维生素D","xw":"甘，平","gj":"肝、胃","yj":"—","prep":"泡发后使用；烹前菌褶朝上晒太阳可提升维D","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"传统晒干；鲜香菇更带气","trad":"秋冬","fl":"全年(栽培)","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Zinc, B vitamins; sun-drying raises vitamin D","xw":"Sweet, neutral","gj":"Liver, Stomach","yj":"—","prep":"Rehydrate before use; set gills-up in sunlight before cooking to boost vitamin D","caut":"—","qinote":"Traditionally sun-dried; fresh shiitake carries more qi","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Autumn–winter","basis":"dried","cat":"Mushrooms"},"serv":{"g":10,"zh":"3–4朵干菇","en":"3–4 dried caps"},"stage":2,"alias":"冬菇 · shiitake"},{"zh":"紫外线照射蘑菇","en":"Mushrooms, UV-exposed","cat":"菌菇","basis":"生","n":{"kcal":22,"pro":3.1,"fib":1.0,"ca":3,"fe":0.5,"zn":0.5,"ala":null,"vc":0},"hi":"维生素D重要植物来源(约26µg)","xw":"—","gj":"—","yj":"待东方组评估","prep":"选购标示“UV处理/维生素D”产品","caut":"维D含量因产品而异","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"中","qinote":"新鲜栽培菌菇","trad":"全年","fl":"全年(栽培)","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"A key plant source of vitamin D (about 26 µg)","xw":"—","gj":"—","yj":"To be assessed by the Eastern team","prep":"Buy products labeled “UV-treated” or “vitamin D”","caut":"Vitamin D varies by product","qinote":"Fresh cultivated mushroom","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Year-round","basis":"raw","cat":"Mushrooms"},"serv":{"g":80,"zh":"½杯","en":"½ cup"},"stage":3,"alias":""},{"zh":"黑木耳(干)","en":"Wood ear, dried","cat":"菌菇","basis":"干","n":{"kcal":null,"pro":null,"fib":null,"ca":null,"fe":null,"zn":null,"ala":null,"vc":null},"hi":"膳食纤维、铁(数值待查)","xw":"甘，平","gj":"胃、大肠","yj":"有出血倾向者慎用","prep":"充分泡发，泡发后尽快食用","caut":"泡发过久(尤其室温)有米酵菌酸中毒风险","src":"待查《中国食物成分表》","color":"黑","whole":"完整","qi":"中","qinote":"传统干制","trad":"夏秋","fl":"全年(栽培)","orgp":"中","orgn":"—","e":{"hi":"Fiber, iron (values pending)","xw":"Sweet, neutral","gj":"Stomach, Large Intestine","yj":"Caution with a bleeding tendency","prep":"Rehydrate fully and use soon after","caut":"Soaking too long (especially at room temperature) risks bongkrekic acid poisoning","qinote":"Traditionally dried","orgn":"—","trad":"Summer–autumn","basis":"dried","cat":"Mushrooms"},"serv":{"g":7,"zh":"一小把干","en":"small handful dry"},"stage":3,"alias":""},{"zh":"海带","en":"Kelp (kombu)","cat":"海藻","basis":"鲜","n":{"kcal":43,"pro":1.7,"fib":1.3,"ca":168,"fe":2.8,"zn":1.2,"ala":null,"vc":3.0},"hi":"碘极高、钙","xw":"咸，寒","gj":"肝、胃、肾","yj":"脾胃虚寒者慎用","prep":"煲汤后可弃去或少量食用","caut":"碘含量极高且波动大，需控制份量；甲状腺问题者咨询医生","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"干制海藻","trad":"夏","fl":"全年(干货)","orgp":"中","orgn":"留意产地水域重金属","e":{"hi":"Very high iodine, calcium","xw":"Salty, cold","gj":"Liver, Stomach, Kidney","yj":"Caution if digestion runs cold","prep":"Simmer in broth, then remove or eat only a little","caut":"Iodine is extremely high and variable — keep portions small; check with a doctor if you have thyroid issues","qinote":"Dried seaweed","orgn":"Check the waters it comes from (heavy metals)","trad":"Summer","basis":"fresh","cat":"Seaweeds"},"serv":{"g":10,"zh":"少量(10克)","en":"small piece (10 g)"},"stage":1,"alias":"昆布 · kombu"},{"zh":"裙带菜","en":"Wakame","cat":"海藻","basis":"鲜","n":{"kcal":45,"pro":3.0,"fib":0.5,"ca":150,"fe":2.2,"zn":0.4,"ala":null,"vc":3.0},"hi":"碘、钙、镁","xw":"咸，寒(初稿)","gj":"肝、肾(初稿)","yj":"待东方组审核","prep":"泡发后凉拌或入汤","caut":"控制份量(碘)","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"干制或盐渍海藻","trad":"春","fl":"全年(干货)","orgp":"中","orgn":"留意产地水域","e":{"hi":"Iodine, calcium, magnesium","xw":"Salty, cold (draft)","gj":"Liver, Kidney (draft)","yj":"Pending Eastern review","prep":"Rehydrate, then use in salads or soup","caut":"Keep portions moderate (iodine)","qinote":"Dried or salted seaweed","orgn":"Check the source waters","trad":"Spring","basis":"fresh","cat":"Seaweeds"},"serv":{"g":10,"zh":"少量(10克)","en":"small amount (10 g)"},"stage":3,"alias":"wakame"},{"zh":"紫菜","en":"Nori (laver)","cat":"海藻","basis":"鲜","n":{"kcal":35,"pro":5.8,"fib":0.3,"ca":70,"fe":1.8,"zn":1.1,"ala":null,"vc":39.0},"hi":"碘、维C；含B12类似物(不可靠)","xw":"甘、咸，寒","gj":"肺","yj":"—","prep":"直接食用或入汤","caut":"不能作为B12可靠来源","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"中","qinote":"干制海藻","trad":"冬春","fl":"全年(干货)","orgp":"中","orgn":"留意产地水域","e":{"hi":"Iodine, vitamin C; B12 analogues (unreliable)","xw":"Sweet, salty, cold","gj":"Lung","yj":"—","prep":"Eat as is or in soup","caut":"Not a reliable B12 source","qinote":"Dried seaweed","orgn":"Check the source waters","trad":"Winter–spring","basis":"fresh","cat":"Seaweeds"},"serv":{"g":10,"zh":"少量(10克)","en":"small amount (10 g)"},"stage":5,"alias":"海苔 · nori"},{"zh":"红薯","en":"Sweet potato","cat":"根茎","basis":"带皮烤","n":{"kcal":90,"pro":2.0,"fib":3.3,"ca":38,"fe":0.7,"zn":0.3,"ala":null,"vc":19.6},"hi":"β-胡萝卜素(维A 961µg RAE)","xw":"甘，平","gj":"脾、肾","yj":"—","prep":"带皮蒸烤；配少量油脂利于维A吸收","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜块根，可发芽","trad":"秋","fl":"8,9,10,11,12","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Beta-carotene (vitamin A 961 µg RAE)","xw":"Sweet, neutral","gj":"Spleen, Kidney","yj":"—","prep":"Steam or roast with the skin on; a little fat helps vitamin A absorption","caut":"—","qinote":"Fresh root; can sprout","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Autumn","basis":"baked with skin","cat":"Roots & tubers"},"serv":{"g":130,"zh":"1个中等","en":"1 medium"},"stage":2,"alias":"地瓜 · 番薯 · sweet potato"},{"zh":"山药","en":"Chinese yam","cat":"根茎","basis":"生","n":{"kcal":118,"pro":1.5,"fib":4.1,"ca":17,"fe":0.5,"zn":0.2,"ala":null,"vc":17.1},"hi":"钾；黏液质","xw":"甘，平","gj":"脾、肺、肾","yj":"药食同源；湿盛中满者慎用","prep":"去皮时戴手套(黏液可致皮肤痒)","caut":"数据为USDA通用薯蓣(yam)，与淮山品种可能不同","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"高","qinote":"新鲜块根","trad":"秋冬","fl":"待查(多为进口)","orgp":"中","orgn":"—","e":{"hi":"Potassium; mucilage","xw":"Sweet, neutral","gj":"Spleen, Lung, Kidney","yj":"Food-as-medicine; caution with heavy dampness and bloating","prep":"Wear gloves when peeling (the mucilage can itch)","caut":"USDA data is for generic yam and may differ from Chinese yam (淮山)","qinote":"Fresh root","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Roots & tubers"},"serv":{"g":100,"zh":"100克","en":"100 g"},"stage":2,"alias":"淮山 · Chinese yam"},{"zh":"南瓜","en":"Pumpkin","cat":"根茎","basis":"生","n":{"kcal":26,"pro":1.0,"fib":0.5,"ca":21,"fe":0.8,"zn":0.3,"ala":null,"vc":9.0},"hi":"β-胡萝卜素","xw":"甘，温","gj":"脾、胃","yj":"—","prep":"蒸煮；配少量油脂","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜瓜果","trad":"秋","fl":"9,10,11,12","orgp":"中","orgn":"—","e":{"hi":"Beta-carotene","xw":"Sweet, warm","gj":"Spleen, Stomach","yj":"—","prep":"Steam or boil; add a little fat","caut":"—","qinote":"Fresh squash","orgn":"—","trad":"Autumn","basis":"raw","cat":"Roots & tubers"},"serv":{"g":100,"zh":"100克","en":"100 g"},"stage":2,"alias":""},{"zh":"莲藕","en":"Lotus root","cat":"根茎","basis":"生","n":{"kcal":74,"pro":2.6,"fib":4.9,"ca":45,"fe":1.2,"zn":0.4,"ala":null,"vc":44.0},"hi":"维C、钾","xw":"生：甘，寒；熟：甘，温","gj":"心、脾、胃","yj":"生用清热，熟用健脾","prep":"生拌或煲汤","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"高","qinote":"新鲜根茎","trad":"秋冬","fl":"待查(多为进口)","orgp":"中","orgn":"水生作物，水源须洁净","e":{"hi":"Vitamin C, potassium","xw":"Raw: sweet, cold; cooked: sweet, warm","gj":"Heart, Spleen, Stomach","yj":"Raw clears heat; cooked strengthens the spleen","prep":"Eat raw in salads or simmer in soup","caut":"—","qinote":"Fresh root","orgn":"Aquatic crop — the water must be clean","trad":"Autumn–winter","basis":"raw","cat":"Roots & tubers"},"serv":{"g":80,"zh":"80克","en":"80 g"},"stage":2,"alias":"藕 · lotus root"},{"zh":"番石榴","en":"Guava","cat":"水果","basis":"生","n":{"kcal":68,"pro":2.6,"fib":5.4,"ca":18,"fe":0.3,"zn":0.2,"ala":null,"vc":228.3},"hi":"维C极高；迈阿密当地可得","xw":"甘、涩，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"连皮食用","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜水果，迈阿密本地可采","trad":"夏秋","fl":"6,7,8,9,10,11","orgp":"低","orgn":"—","e":{"hi":"Extremely high vitamin C; grown locally in Miami","xw":"Sweet, astringent, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Eat with the skin","caut":"—","qinote":"Fresh fruit, picked locally in Miami","orgn":"—","trad":"Summer–autumn","basis":"raw","cat":"Fruits"},"serv":{"g":55,"zh":"1个","en":"1 fruit"},"stage":0,"alias":"芭乐 · guava"},{"zh":"猕猴桃","en":"Kiwifruit","cat":"水果","basis":"生","n":{"kcal":61,"pro":1.1,"fib":3.0,"ca":34,"fe":0.3,"zn":0.1,"ala":null,"vc":92.7},"hi":"维C、维K","xw":"甘、酸，寒","gj":"胃、膀胱","yj":"脾胃虚寒者少食","prep":"与含铁餐同食","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"青","whole":"完整","qi":"高","qinote":"新鲜水果","trad":"秋","fl":"非本地(进口)","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Vitamins C and K","xw":"Sweet, sour, cold","gj":"Stomach, Bladder","yj":"Eat less if digestion runs cold","prep":"Eat with iron-rich meals","caut":"—","qinote":"Fresh fruit","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Autumn","basis":"raw","cat":"Fruits"},"serv":{"g":70,"zh":"1个","en":"1 fruit"},"stage":0,"alias":"奇异果 · kiwi"},{"zh":"橙","en":"Orange","cat":"水果","basis":"生","n":{"kcal":47,"pro":0.9,"fib":2.4,"ca":40,"fe":0.1,"zn":0.1,"ala":null,"vc":53.2},"hi":"维C、类黄酮","xw":"甘、酸，凉","gj":"肺、胃","yj":"—","prep":"与含铁餐同食","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜水果，佛州本地","trad":"冬","fl":"10,11,12,1,2,3,4,5,6","orgp":"中","orgn":"—","e":{"hi":"Vitamin C, flavonoids","xw":"Sweet, sour, cool","gj":"Lung, Stomach","yj":"—","prep":"Eat with iron-rich meals","caut":"—","qinote":"Fresh fruit, grown in Florida","orgn":"—","trad":"Winter","basis":"raw","cat":"Fruits"},"serv":{"g":130,"zh":"1个中等","en":"1 medium"},"stage":0,"alias":""},{"zh":"蓝莓","en":"Blueberries","cat":"水果","basis":"生","n":{"kcal":57,"pro":0.7,"fib":2.4,"ca":6,"fe":0.3,"zn":0.2,"ala":null,"vc":9.7},"hi":"花青素","xw":"传统典籍无记载","gj":"—","yj":"待东方组评估","prep":"鲜食或冷冻","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"新鲜浆果，佛州春季产","trad":"夏","fl":"3,4,5","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Anthocyanins","xw":"Not in classical texts","gj":"—","yj":"To be assessed by the Eastern team","prep":"Fresh or frozen","caut":"—","qinote":"Fresh berries; Florida's crop comes in spring","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Summer","basis":"raw","cat":"Fruits"},"serv":{"g":75,"zh":"½杯","en":"½ cup"},"stage":0,"alias":""},{"zh":"枸杞子(干)","en":"Goji berries, dried","cat":"药食同源","basis":"干","n":{"kcal":349,"pro":14.3,"fib":13.0,"ca":190,"fe":6.8,"zn":null,"ala":null,"vc":48.4},"hi":"维A(类胡萝卜素)、维C","xw":"甘，平","gj":"肝、肾","yj":"外感发热、脾虚泄泻者慎用","prep":"泡水、入粥或直接食用","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"中","qinote":"传统晒干","trad":"夏秋","fl":"全年(干货)","orgp":"高","orgn":"进口枸杞农残、硫熏问题较多，优先有机认证","e":{"hi":"Vitamin A (carotenoids), vitamin C","xw":"Sweet, neutral","gj":"Liver, Kidney","yj":"Caution with a fever from a cold, or loose stools","prep":"Steep in hot water, add to congee, or eat as is","caut":"—","qinote":"Traditionally sun-dried","orgn":"Imported goji often has pesticide or sulfur-fumigation problems — prefer certified organic","trad":"Summer–autumn","basis":"dried","cat":"Food-as-medicine"},"serv":{"g":15,"zh":"1汤匙","en":"1 tbsp"},"stage":5,"alias":"goji"},{"zh":"红枣(干)","en":"Jujube, dried","cat":"药食同源","basis":"干","n":{"kcal":287,"pro":3.7,"fib":null,"ca":79,"fe":1.8,"zn":0.5,"ala":null,"vc":13.0},"hi":"钾","xw":"甘，温","gj":"脾、胃","yj":"湿盛、齿病者慎用","prep":"去核入粥或煲汤","caut":"含糖较高，控制份量","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"中","qinote":"传统晒干","trad":"秋","fl":"全年(干货)","orgp":"中","orgn":"—","e":{"hi":"Potassium","xw":"Sweet, warm","gj":"Spleen, Stomach","yj":"Caution with heavy dampness or dental problems","prep":"Pit and add to congee or soup","caut":"Fairly high in sugar — keep portions small","qinote":"Traditionally sun-dried","orgn":"—","trad":"Autumn","basis":"dried","cat":"Food-as-medicine"},"serv":{"g":15,"zh":"3颗","en":"3 dates"},"stage":1,"alias":"大枣 · jujube"},{"zh":"生姜","en":"Ginger","cat":"药食同源","basis":"生","n":{"kcal":80,"pro":1.8,"fib":2.0,"ca":16,"fe":0.6,"zn":0.3,"ala":null,"vc":5.0},"hi":"姜辣素","xw":"辛，微温","gj":"肺、脾、胃","yj":"阴虚内热者慎用","prep":"可平衡寒性食材(如绿豆、海带)","caut":"姜不属五辛，适合纯净素","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜根茎，可发芽","trad":"夏秋(新姜)","fl":"全年","orgp":"中","orgn":"—","e":{"hi":"Gingerols","xw":"Pungent, slightly warm","gj":"Lung, Spleen, Stomach","yj":"Caution with yin-deficiency heat","prep":"Balances cooling foods such as mung beans and kelp","caut":"Ginger is not one of the five pungents (五辛), so it suits a pure plant-based diet","qinote":"Fresh root; can sprout","orgn":"—","trad":"Summer–autumn (young ginger)","basis":"raw","cat":"Food-as-medicine"},"serv":{"g":5,"zh":"几片","en":"a few slices"},"stage":1,"alias":""},{"zh":"莲子(干)","en":"Lotus seeds, dried","cat":"药食同源","basis":"干","n":{"kcal":332,"pro":15.4,"fib":null,"ca":163,"fe":3.5,"zn":1.1,"ala":null,"vc":0},"hi":"蛋白、钾、镁","xw":"甘、涩，平","gj":"脾、肾、心","yj":"大便燥结者慎用","prep":"浸泡后煮","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"白","whole":"完整","qi":"中","qinote":"干制；带芯莲子可发芽","trad":"夏秋","fl":"全年(干货)","orgp":"中","orgn":"—","e":{"hi":"Protein, potassium, magnesium","xw":"Sweet, astringent, neutral","gj":"Spleen, Kidney, Heart","yj":"Caution with dry, hard stools","prep":"Soak before cooking","caut":"—","qinote":"Dried; seeds with the germ can still sprout","orgn":"—","trad":"Summer–autumn","basis":"dried","cat":"Food-as-medicine"},"serv":{"g":30,"zh":"一小把","en":"small handful"},"stage":1,"alias":""},{"zh":"薏苡仁/薏米","en":"Job's tears (coix)","cat":"药食同源","basis":"干","n":{"kcal":null,"pro":null,"fib":null,"ca":null,"fe":null,"zn":null,"ala":null,"vc":null},"hi":"数值待查","xw":"甘、淡，凉","gj":"脾、胃、肺","yj":"孕妇慎用","prep":"浸泡后煮；可炒制减寒性","caut":"—","src":"待查《中国食物成分表》","color":"白","whole":"完整","qi":"中","qinote":"去壳后发芽力弱","trad":"秋","fl":"全年(干货)","orgp":"中","orgn":"—","e":{"hi":"Values pending","xw":"Sweet, bland, cool","gj":"Spleen, Stomach, Lung","yj":"Use with caution in pregnancy","prep":"Soak before cooking; dry-roasting tempers its cooling nature","caut":"—","qinote":"Sprouts poorly once hulled","orgn":"—","trad":"Autumn","basis":"dried","cat":"Food-as-medicine"},"serv":{"g":40,"zh":"40克干","en":"40 g dry"},"stage":1,"alias":"薏仁 · Job's tears"},{"zh":"营养酵母(强化)","en":"Nutritional yeast, fortified","cat":"其他","basis":"干","n":{"kcal":null,"pro":null,"fib":null,"ca":null,"fe":null,"zn":null,"ala":null,"vc":null},"hi":"部分产品强化B12；各品牌差异大","xw":"—","gj":"—","yj":"待东方组评估","prep":"撒于菜肴","caut":"按标签核实B12含量；不可替代B12补充剂的稳定性","src":"产品标签","color":"黄","whole":"加工","qi":"低","qinote":"工业加工制品，作为B12强化来源","trad":"—","fl":"全年","orgp":"低","orgn":"—","e":{"hi":"Some products are fortified with B12; brands vary widely","xw":"—","gj":"—","yj":"To be assessed by the Eastern team","prep":"Sprinkle on dishes","caut":"Check B12 on the label; not as reliable as a B12 supplement","qinote":"Industrially processed; used as a B12-fortified source","orgn":"—","trad":"—","basis":"dried","cat":"Other"},"serv":{"g":5,"zh":"1汤匙","en":"1 tbsp"},"stage":5,"alias":"nooch"},{"zh":"番茄","en":"Tomato","cat":"果菜","basis":"生","n":{"kcal":18,"pro":0.9,"fib":1.2,"ca":10,"fe":0.3,"zn":0.2,"ala":null,"vc":13.7},"hi":"番茄红素(烹调加油后更易吸收)","xw":"甘、酸，微寒","gj":"肝、胃","yj":"脾胃虚寒者不宜多生食","prep":"加少量油烹调，番茄红素吸收更好","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜果菜，佛州冬春产","trad":"夏","fl":"10,11,12,1,2,3,4,5,6","orgp":"中","orgn":"—","e":{"hi":"Lycopene (better absorbed when cooked with oil)","xw":"Sweet, sour, slightly cold","gj":"Liver, Stomach","yj":"Not too much raw if digestion runs cold","prep":"Cook with a little oil for better lycopene absorption","caut":"—","qinote":"Fresh; Florida's crop comes in winter–spring","orgn":"—","trad":"Summer","basis":"raw","cat":"Fruiting vegetables"},"serv":{"g":120,"zh":"1个中等","en":"1 medium"},"stage":3,"alias":"西红柿 · tomato"},{"zh":"红甜椒","en":"Red bell pepper","cat":"果菜","basis":"生","n":{"kcal":31,"pro":1.0,"fib":2.1,"ca":7,"fe":0.4,"zn":0.3,"ala":null,"vc":127.7},"hi":"维C极高、维A","xw":"甘，温(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"生食保留维C；与豆类同餐助铁吸收","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜果菜，佛州冬春产","trad":"夏","fl":"11,12,1,2,3,4,5","orgp":"高","orgn":"EWG“农残最多”榜单常见，优先有机","e":{"hi":"Very high vitamin C, vitamin A","xw":"Sweet, warm (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Eat raw to keep vitamin C; pair with beans to help iron absorption","caut":"—","qinote":"Fresh; Florida's crop comes in winter–spring","orgn":"Often on EWG's Dirty Dozen (most pesticide residue) — prefer organic","trad":"Summer","basis":"raw","cat":"Fruiting vegetables"},"serv":{"g":80,"zh":"½杯","en":"½ cup"},"stage":3,"alias":"红灯笼椒 · bell pepper"},{"zh":"甜菜根","en":"Beetroot","cat":"根茎","basis":"生","n":{"kcal":43,"pro":1.6,"fib":2.8,"ca":16,"fe":0.8,"zn":0.4,"ala":null,"vc":4.9},"hi":"叶酸(109µg)、天然硝酸盐","xw":"甘，平(初稿)","gj":"心、肝(初稿)","yj":"待东方组审核","prep":"生刨丝或烤","caut":"草酸偏高","src":"USDA FoodData Central (SR Legacy)","color":"赤","whole":"完整","qi":"高","qinote":"新鲜块根；甜菜叶亦可食","trad":"秋冬","fl":"12,1,2,3,4","orgp":"中","orgn":"—","e":{"hi":"Folate (109 µg), natural nitrates","xw":"Sweet, neutral (draft)","gj":"Heart, Liver (draft)","yj":"Pending Eastern review","prep":"Grate raw or roast","caut":"Fairly high in oxalate","qinote":"Fresh root; the greens are edible too","orgn":"—","trad":"Autumn–winter","basis":"raw","cat":"Roots & tubers"},"serv":{"g":80,"zh":"80克","en":"80 g"},"stage":2,"alias":"红菜头 · beet"},{"zh":"胡萝卜","en":"Carrot","cat":"根茎","basis":"生","n":{"kcal":41,"pro":0.9,"fib":2.8,"ca":33,"fe":0.3,"zn":0.2,"ala":null,"vc":5.9},"hi":"β-胡萝卜素(维A 835µg RAE)","xw":"甘，平","gj":"肺、脾","yj":"—","prep":"配少量油脂烹调利于维A吸收","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黄","whole":"完整","qi":"高","qinote":"新鲜块根","trad":"冬","fl":"11,12,1,2,3,4,5","orgp":"低","orgn":"EWG“农残最少”榜单常见","e":{"hi":"Beta-carotene (vitamin A 835 µg RAE)","xw":"Sweet, neutral","gj":"Lung, Spleen","yj":"—","prep":"Cook with a little fat for vitamin A","caut":"—","qinote":"Fresh root","orgn":"Often on EWG's Clean Fifteen (least residue)","trad":"Winter","basis":"raw","cat":"Roots & tubers"},"serv":{"g":80,"zh":"1根中等","en":"1 medium"},"stage":2,"alias":"红萝卜 · carrot"},{"zh":"紫甘蓝","en":"Red cabbage","cat":"绿叶及十字花科","basis":"生","n":{"kcal":31,"pro":1.4,"fib":2.1,"ca":45,"fe":0.8,"zn":0.2,"ala":null,"vc":57.0},"hi":"花青素、维C","xw":"甘，平(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"生拌或快炒；加醋颜色更鲜","caut":"—","src":"USDA FoodData Central (SR Legacy)","color":"黑","whole":"完整","qi":"高","qinote":"新鲜蔬菜(紫色归入黑/水，初稿)","trad":"秋冬","fl":"11,12,1,2,3,4,5","orgp":"低","orgn":"甘蓝类常在EWG“农残最少”榜单","e":{"hi":"Anthocyanins, vitamin C","xw":"Sweet, neutral (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Raw in salads or a quick stir-fry; a splash of vinegar brightens the color","caut":"—","qinote":"Fresh vegetable (purple grouped with black / Water, draft)","orgn":"Cabbages are often on EWG's Clean Fifteen","trad":"Autumn–winter","basis":"raw","cat":"Greens & crucifers"},"serv":{"g":80,"zh":"½杯","en":"½ cup"},"stage":3,"alias":"红椰菜 · 紫椰菜 · red cabbage"},{"zh":"黑米","en":"Black rice","cat":"全谷","basis":"生(干)","n":{"kcal":361,"pro":7.57,"fib":4.18,"ca":14.4,"fe":1.12,"zn":1.72,"ala":null,"vc":null},"hi":"花青素(种皮)；全谷","xw":"甘，温(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"浸泡4小时以上再煮，或与糙米、豆类同煮","caut":"留意砷：多水煮后沥水","src":"USDA FoodData Central (Foundation, FDC 2710825)","color":"黑","whole":"完整","qi":"高","qinote":"未精磨的活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"紫米多为黑色糯米，营养相近，数据待查","e":{"hi":"Anthocyanins (in the bran); whole grain","xw":"Sweet, warm (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Soak 4+ hours, or cook together with brown rice or beans","caut":"Watch arsenic: cook in extra water and drain","qinote":"Unpolished living seed; can sprout","orgn":"Purple rice is usually black glutinous rice; similar nutrition, data pending","trad":"Autumn harvest · stores well","basis":"raw, dry","cat":"Whole grains"},"serv":{"g":45,"zh":"¼杯生米(约45克)","en":"¼ cup raw (45 g)"},"stage":1,"alias":"紫米 · 黑糯米 · forbidden rice"},{"zh":"红米","en":"Red rice","cat":"全谷","basis":"生(干)","n":{"kcal":360,"pro":8.56,"fib":4.2,"ca":9.22,"fe":1.2,"zn":2.56,"ala":null,"vc":null},"hi":"原花青素(种皮)；锌","xw":"甘，温(初稿)","gj":"脾、胃(初稿)","yj":"待东方组审核","prep":"浸泡4小时以上再煮","caut":"留意砷：多水煮后沥水","src":"USDA FoodData Central (Foundation, FDC 2710838)","color":"赤","whole":"完整","qi":"高","qinote":"未精磨的活种子，可发芽","trad":"秋收·耐储","fl":"全年(耐储)","orgp":"中","orgn":"—","e":{"hi":"Proanthocyanidins (in the bran); zinc","xw":"Sweet, warm (draft)","gj":"Spleen, Stomach (draft)","yj":"Pending Eastern review","prep":"Soak 4+ hours before cooking","caut":"Watch arsenic: cook in extra water and drain","qinote":"Unpolished living seed; can sprout","orgn":"—","trad":"Autumn harvest · stores well","basis":"raw, dry","cat":"Whole grains"},"serv":{"g":45,"zh":"¼杯生米(约45克)","en":"¼ cup raw (45 g)"},"stage":1,"alias":""}];
+const SPICES = [{"zh":"肉桂","en":"Cinnamon","xw":"辛、甘，大热(初稿)","gj":"肾、脾、心、肝(初稿)","nat":"hot","yj":"阴虚火旺者忌；孕妇慎用(初稿)","use":"燕麦粥、红薯、炖豆","use_en":"oatmeal, sweet potato, stewed beans","sci":"常见的中国肉桂(cassia)香豆素较高，长期大量吃宜改用锡兰肉桂。","sci_en":"Common cassia cinnamon is high in coumarin; for daily large amounts, choose Ceylon cinnamon.","xw_en":"Pungent, sweet, very hot (draft)","gj_en":"Kidney, Spleen, Heart, Liver (draft)","yj_en":"Avoid with yin-deficiency fire; caution in pregnancy (draft)"},{"zh":"姜黄","en":"Turmeric","xw":"辛、苦，温(初稿)","gj":"脾、肝(初稿)","nat":"warm","yj":"孕妇慎用(初稿)","use":"豆类、米饭、汤","use_en":"beans, rice, soups","sci":"Daily Dozen 建议每天 ¼ 茶匙；配少许黑胡椒可提高姜黄素吸收。服抗凝药或有胆结石者先问医生。","sci_en":"The Daily Dozen suggests ¼ tsp a day; a pinch of black pepper improves curcumin absorption. Check with a doctor if on blood thinners or with gallstones.","xw_en":"Pungent, bitter, warm (draft)","gj_en":"Spleen, Liver (draft)","yj_en":"Caution in pregnancy (draft)"},{"zh":"白胡椒","en":"White pepper","xw":"辛，热(初稿)","gj":"胃、大肠(初稿)","nat":"hot","yj":"阴虚有火者忌(初稿)","use":"汤、粥","use_en":"soups, congee","sci":"—","sci_en":"—","xw_en":"Pungent, hot (draft)","gj_en":"Stomach, Large Intestine (draft)","yj_en":"Avoid with yin deficiency and heat (draft)"},{"zh":"黑胡椒","en":"Black pepper","xw":"辛，热(初稿)","gj":"胃、大肠(初稿)","nat":"hot","yj":"阴虚有火者忌(初稿)","use":"配姜黄、炒菜","use_en":"with turmeric, stir-fries","sci":"所含胡椒碱可提高姜黄素吸收。","sci_en":"Its piperine improves curcumin absorption.","xw_en":"Pungent, hot (draft)","gj_en":"Stomach, Large Intestine (draft)","yj_en":"Avoid with yin deficiency and heat (draft)"},{"zh":"花椒","en":"Sichuan pepper","xw":"辛，温(初稿)","gj":"脾、胃、肾(初稿)","nat":"warm","yj":"阴虚火旺者忌；孕妇慎用(初稿)","use":"炒菜、卤豆干、拌菜","use_en":"stir-fries, braises, dressings","sci":"—","sci_en":"—","xw_en":"Pungent, warm (draft)","gj_en":"Spleen, Stomach, Kidney (draft)","yj_en":"Avoid with yin-deficiency fire; caution in pregnancy (draft)"},{"zh":"八角","en":"Star anise","xw":"辛，温(初稿)","gj":"肝、肾、脾、胃(初稿)","nat":"warm","yj":"阴虚火旺者慎用(初稿)","use":"炖豆、卤、汤底","use_en":"stewed beans, braises, broth","sci":"只买中国八角；外形相似的日本莽草有毒，请从可靠来源购买。","sci_en":"Buy only Chinese star anise; the look-alike Japanese star anise is toxic, so buy from a reliable source.","xw_en":"Pungent, warm (draft)","gj_en":"Liver, Kidney, Spleen, Stomach (draft)","yj_en":"Caution with yin-deficiency fire (draft)"},{"zh":"小茴香","en":"Fennel seed","xw":"辛，温(初稿)","gj":"肝、肾、脾、胃(初稿)","nat":"warm","yj":"阴虚火旺者慎用(初稿)","use":"豆类、根茎类","use_en":"beans, root vegetables","sci":"—","sci_en":"—","xw_en":"Pungent, warm (draft)","gj_en":"Liver, Kidney, Spleen, Stomach (draft)","yj_en":"Caution with yin-deficiency fire (draft)"},{"zh":"丁香","en":"Clove","xw":"辛，温(初稿)","gj":"脾、胃、肺、肾(初稿)","nat":"warm","yj":"热病及阴虚内热者忌(初稿)","use":"炖煮，一两粒即可","use_en":"stews; one or two cloves is enough","sci":"味道很浓，少量即可。","sci_en":"Very strong; a little goes a long way.","xw_en":"Pungent, warm (draft)","gj_en":"Spleen, Stomach, Lung, Kidney (draft)","yj_en":"Avoid with febrile illness or yin-deficiency heat (draft)"},{"zh":"陈皮","en":"Aged tangerine peel","xw":"苦、辛，温(初稿)","gj":"肺、脾(初稿)","nat":"warm","yj":"—","use":"红豆汤、粥","use_en":"red bean soup, congee","sci":"—","sci_en":"—","xw_en":"Bitter, pungent, warm (draft)","gj_en":"Lung, Spleen (draft)","yj_en":"—"},{"zh":"紫苏叶","en":"Perilla leaf","xw":"辛，温(初稿)","gj":"肺、脾(初稿)","nat":"warm","yj":"—","use":"凉拌、炒菜、配豆腐","use_en":"salads, stir-fries, with tofu","sci":"—","sci_en":"—","xw_en":"Pungent, warm (draft)","gj_en":"Lung, Spleen (draft)","yj_en":"—"}];
+const DV = {pro:50, fe:18, zn:11, ca:1300, ala:1.6, vc:90};
 const NUTK = ['pro','fe','ca','zn','ala','vc'];
 const MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const CRUC = new Set(['羽衣甘蓝','小白菜/青江菜','芥兰','西洋菜','西兰花','紫甘蓝']);
+const GREENS = new Set(['羽衣甘蓝','小白菜/青江菜','菠菜','芥兰','西洋菜']);
+const DDEF = [
+  {k:'beans', n:3, m:f => f.cat === '豆类'},
+  {k:'berries', n:1, m:f => f.zh === '蓝莓' || f.zh === '枸杞子(干)'},
+  {k:'fruits', n:3, m:f => f.cat === '水果' && f.zh !== '蓝莓'},
+  {k:'cruc', n:1, m:f => CRUC.has(f.zh)},
+  {k:'greens', n:2, m:f => GREENS.has(f.zh)},
+  {k:'veg', n:2, m:f => ['根茎','菌菇','海藻','果菜'].includes(f.cat) || (f.cat === '绿叶及十字花科' && !GREENS.has(f.zh) && !CRUC.has(f.zh))},
+  {k:'flax', n:1, m:f => f.zh === '亚麻籽'},
+  {k:'nuts', n:1, m:f => f.cat === '坚果种子' && f.zh !== '亚麻籽'},
+  {k:'spices', n:1, m:() => false},
+  {k:'grains', n:3, m:f => f.cat === '全谷'},
+  {k:'drinks', n:5, m:() => false},
+  {k:'exercise', n:1, m:() => false}
+];
 
 const T = {
 zh:{
   title:'东西有道食材指南', brand:'东西有道食相连 · 纯净素食材指南', h1:'按时令与体质，选五色好食材',
-  tagline:'选好所在地、月份和体质，下面就会列出当季、营养密度高的纯净素食材，并按五行五色搭成一盘。',
+  tagline:'选好所在地、月份和体质，就会得到一份当季、营养足、五色俱全的纯净素一餐。',
   lgPlace:'所在地区', hemi:'半球', clim:'气候', hemiN:'北半球', hemiS:'南半球', climsub:'热带 / 亚热带', climtemp:'温带', climcold:'冬季严寒',
   placeHint:'列表里没有你的城市？选“其他地区”，再选半球和气候即可。',
   lgMonth:'月份', month:m => `${m} 月`, thisMonth:'（本月）',
   lgTz:'体质', tzcold:'偏寒', tzneutral:'平和', tzhot:'偏热',
-  tzHint:{cold:'怕冷、手脚易凉、吃生冷易不适。寒凉食材会排后，并提示配姜熟食。', neutral:'寒热不明显。按时令与营养排序。', hot:'怕热、易口干、易上火。温热食材会排后。'},
-  tzNote:' 体质判断请以中医师意见为准。',
+  tzHint:{cold:'怕冷、手脚易凉、吃生冷易不适。寒凉食材排后，并提示配姜熟食。', neutral:'寒热不明显。按时令与营养排序。', hot:'怕热、易口干、易上火。温热食材排后。'},
+  tzNote:' 仅供参考，以中医师判断为准。',
+  quizTitle:'不确定自己的体质？做个小测验', quizOut:r => `结果：${r}`, quizNeed:'请回答全部 4 题', quizApply:'用这个结果',
+  quiz:[['平时怕冷还是怕热？',['怕冷','都还好','怕热']],['手脚常常冰凉吗？',['常常','偶尔','很少，反而手心热']],['喜欢喝热饮还是冷饮？',['热饮','都可以','冷饮']],['大便偏稀还是偏干？',['偏稀','正常','偏干、易上火']]],
   lgNut:'想重点补充的营养', nutHint:'不选则按综合营养密度排序。', showOff:'也显示非当季食材',
   nut:{pro:'蛋白质', fe:'铁', ca:'钙', zn:'锌', ala:'Omega-3', vc:'维生素C'},
-  hPlate:'五色一盘', plateSub:'每种颜色挑一样当下最合适的主食材，种子坚果放在搭配提示里作点缀。按五方排列：南火赤，东木青，中土黄，西金白，北水黑。',
-  hTips:'这一盘的搭配提示', hEss:'每个人都要留意', hList:'全部食材',
-  search:'搜索食材，如 黑芝麻 / kale', all:'全部',
+  hPlate:'今天这一餐', plateSub:'底是主食（五谷为养），上面按五方排出四色配菜与中央的黄：南火赤，东木青，中土黄，西金白，北水黑。',
+  stapleLbl:'主食', stapleAuto:'自动推荐', baseLbl:'底 · 五谷为养', withBean:'同煮',
+  hPot:'一锅五色 · 下锅顺序', potSub:'把这一餐煮成一锅的参考做法。耐煮的先下，嫩的后下，种子关火后再撒。',
+  step:{1:'先下锅，加足水煮开后转小火约 40–60 分钟（视豆的种类）', 2:'出锅前约 15–20 分钟放入', 3:'出锅前约 5–8 分钟放入', 4:'最后 1–2 分钟放入', 5:'关火后撒上', 0:'不入锅，饭后或另吃'},
+  stepFirst:{2:'先下锅，煮开后转小火约 15–20 分钟', 3:'先下锅，约 5–8 分钟'},
+  potNote:'豆和米先浸泡 4 小时以上。豆类一定要完全煮熟。',
+  hTips:'搭配提示', evSci:'科学', evSciD:'有营养学研究支持', evTrad:'传统', evTradD:'来自中医食养经验',
+  hSpice:'调料', spiceSub:(why) => `${why}以下调料都不属五辛。`, spiceWhyCold:'这个季节或体质宜温，可多用温性调料。', spiceWhyHot:'这个季节或体质偏热，温热调料少量即可。', spiceWhyNeutral:'寒热平和，温性调料适量即可。',
+  spiceAll:'全部调料（性味、用法、注意）', spTh:['调料','性味','归经','宜忌','用法','注意'],
+  hDD:'Daily Dozen 今日清单', ddSub:'Dr. Greger 建议每天吃到的 12 类食物。点格子记录今天吃了几份，只存在你自己的设备上，每天自动重置。旁边灰字是这一餐里属于该类的食材。',
+  dd:{beans:'豆类', berries:'浆果', fruits:'其他水果', cruc:'十字花科', greens:'绿叶菜', veg:'其他蔬菜', flax:'亚麻籽', nuts:'坚果种子', spices:'香料（姜黄 ¼ 茶匙）', grains:'全谷', drinks:'饮水', exercise:'运动'},
+  ddCount:(a, b) => `今天 ${a} / ${b}`, ddReset:'清空今天的记录', ddServ:'份',
+  hEss:'每个人都要留意', hList:'全部食材', search:'搜索食材或别名，如 芭乐 / kale', all:'全部',
   ess:[['必须补充','维生素 B12','植物性食物没有可靠来源，紫菜所含为类似物，不能替代。请服用补充剂或强化食品。'],
        ['视情况补充','维生素 D','主要靠日晒。日照少的季节或地区可考虑补充；晒过太阳的香菇也有一些。'],
        ['适量','碘','用加碘盐，或每周几次少量紫菜、裙带菜。海带碘含量很高，不宜天天大量吃。'],
        ['可考虑','DHA / EPA','亚麻籽、核桃的 ALA 转化率低，需要时可选藻油。']],
-  foot1:'营养数值为每 100 克可食部分，来自 USDA FoodData Central。干货（种子、干果、干菇）的数值天然偏高，实际每餐用量较少。',
-  foot2:'性味归经、五色、带气、时令为“东西有道食相连”小组初稿，标注“初稿”的内容尚待审核。本指南为一般食养参考，不能代替医生或中医师的个人建议。',
-  foot3:n => `食材库 v0.2 · 共 ${n} 种食材`,
+  hPrin:'我们的原则与参考标准',
+  layers:[['第一层 · 底线','纯净素（无动物性食物、无五辛）；以完整天然食物为主。钙凝固豆腐、强化营养酵母和 B12 补充剂属于必要例外。'],
+          ['第二层 · 西方营养科学：够不够','每份营养按美国 FDA 每日参考值计算：占 10% 以上为“好来源”，20% 以上为“优质来源”。每日结构以 Daily Dozen 为主要参考。'],
+          ['第三层 · 东方食养：怎么选、怎么配','五色五行、寒热与体质、时令节气。性味归经正在请中医师审核。“带气”（生命力）仅作说明，不参与排序，待小组定义。'],
+          ['第四层 · 落地：怎么买、怎么做','有机优先级、当地出产、调料。有机的好处主要是减少农残、对环境更好，营养差别不大。']],
+  refs:'参考：Daily Dozen（NutritionFacts.org）；EAT-Lancet 2025 每日植物性食物参考量（约 2,400 千卡）：蔬菜 300 克、水果 200 克、全谷 210 克、薯类 50 克、豆类 75 克（可到 150 克）、坚果 50 克、植物油 40 克。Daily Dozen 不建议额外加油，两者在油上有分歧。',
+  foot1:'营养数据来自 USDA FoodData Central，按每份计算，以美国 FDA 每日参考值（蛋白质 50 克、铁 18 毫克、钙 1300 毫克、锌 11 毫克、维C 90 毫克）及 ALA 1.6 克为基准。',
+  foot2:'性味归经、五色、带气、时令为“东西有道食相连”小组初稿，正在请中医师审核，标注“初稿”的内容尚未确认。本指南为一般食养参考，不能代替医生或中医师的个人建议。',
+  foot3:n => `食材库 v0.3 · 共 ${n} 种食材`,
   season:{春:'春', 夏:'夏', 长夏:'长夏', 秋:'秋', 冬:'冬'},
   terms:t => ` · 节气：${t.join('、')}`, sTerms:'（南半球按对应季节）',
   seasonAdvice:{春:'春季养肝，宜多吃青色、新鲜嫩芽类食物，助阳气升发。', 夏:'夏季养心，宜吃赤色食物，配清热解暑之品，少吃生冷。', 长夏:'长夏养脾，湿气较重，宜吃黄色、健脾祛湿的食物。', 秋:'秋季养肺，宜吃白色、滋润的食物，如山药、莲藕、莲子。', 冬:'冬季养肾，宜吃黑色、温补收藏的食物，如黑豆、黑芝麻。'},
@@ -272,51 +394,72 @@ zh:{
   organ:{青:'肝', 赤:'心', 黄:'脾', 白:'肺', 黑:'肾'}, dir:{青:'东', 赤:'南', 黄:'中', 白:'西', 黑:'北'},
   nat:{cold:'寒', cool:'凉', neutral:'平', warm:'温', hot:'热', mixed:'生寒熟温'}, natB:n => '性' + n,
   avail:{in:'当季', off:'非当季', all:'全年', grown:'全年栽培', stores:'全年可储', imported:'多为进口', notLocal:'非当地出产', winterImp:'冬季多为温室 / 外地'},
-  rich:l => l.join('、') + '丰富', none:'本月暂无', noneHint:'可打开“也显示非当季食材”查看', alt:'也可选：', sep:'、',
-  listSub:'按合适程度排序：时令、体质、所选营养、完整度与生命力都计入。', hidden:n => `已隐藏 ${n} 种非当季食材。`,
+  pctB:(n, p) => `${n} ${p}%`, why:'推荐理由：', r:{fit:'合你的体质', seasonColor:c => `本季宜${c}色`, whole:'完整食物', each:(n, p) => `每份${n} ${p}%`},
+  none:'本月暂无', noneHint:'可打开“也显示非当季食材”查看', alt:'买不到可换：', sep:'、', join:'、',
+  listSub:'按合适程度排序：时令、体质、所选营养（按每份）、完整度都计入。点开可看推荐理由和营养数据。', hidden:n => `已隐藏 ${n} 种非当季食材。`,
   more:n => `显示全部 ${n} 种`, empty:'没有符合条件的食材。试试清空搜索、选“全部”颜色，或打开“也显示非当季食材”。',
-  org:'宜买有机', per:b => `每100克（${b}）`, amount:'含量',
+  org:'宜买有机', perS:s => `每份（${s}）`, per100:b => `每100克（${b}）`, dvRow:'占每日所需', amount:'含量',
   rows:{kcal:'能量', pro:'蛋白质', fib:'纤维', ca:'钙', fe:'铁', zn:'锌', ala:'ALA', vc:'维C'},
-  dt:{hi:'亮点', xw:'性味', yj:'宜忌', wx:'五行', qi:'生命力', prep:'怎么吃', caut:'注意', orgn:'采购', trad:'时令'},
+  dt:{alias:'别名', hi:'亮点', xw:'性味', yj:'宜忌', wx:'五行', qi:'生命力', prep:'怎么吃', caut:'注意', orgn:'采购', trad:'时令', src:'数据'},
   gj:g => '；归' + g, wx:(c, el, org) => `${c}色 · ${el} · 入${org}`,
   qiTxt:(q, w, n) => `带气${q} · ${w}食物 · ${n}`, qi:{高:'高', 中:'中', 低:'低'}, whole:{完整:'完整', 轻加工:'轻加工', 加工:'加工'},
   tradTxt:t => '传统：' + t, draft:/\(初稿\)/g, draftLbl:'（初稿）',
   tip:{
-    k:{seed:'撒', fe:'铁', grain:'谷', soak:'芽', ginger:'姜', cool:'润', bal:'衡', ca:'钙', ala:'籽', oil:'油', flavor:'鲜'},
     feVc:(a, b) => `${a}含铁，与${b}同餐，维生素C能让植物铁吸收好很多。餐时不要喝浓茶、咖啡。`,
     fe:a => `${a}含铁，可再加一样富含维C的食材（如番石榴、红甜椒、橙）同餐。`,
-    grainLeg:(g, l) => `${g}配${l}，谷豆同食，蛋白质更完整。`, grain:'同一天里谷物与豆类都吃一些，蛋白质更完整。',
-    soak:b => `${b}先浸泡或发芽再煮，可减少植酸、提高矿物质吸收，也更有生气。`,
+    grainLeg:(g, l) => `${g}与${l}同煮，谷豆同食，蛋白质更完整。`, grain:'同一天里谷物与豆类都吃一些，蛋白质更完整。',
+    soak:b => `${b}先浸泡或发芽再煮，可减少植酸、提高矿物质吸收。`,
+    soakTrad:'发芽的种子更有生气。',
     ginger:c => `${c}性偏寒凉，宜熟食温食，烹调时加几片姜。`, cool:w => `${w}性偏温，少量即可，可配清润的食材。`,
-    bal:c => `这一盘偏寒凉（${c}），可加姜或红枣平衡。`,
+    bal:c => `这一餐偏寒凉（${c}），可加姜或红枣平衡。`,
     ca:'补钙优先选小白菜、芥兰、羽衣甘蓝和钙凝固豆腐。菠菜草酸高，钙吸收率很低。',
-    ala:'亚麻籽要现磨才能吸收；每天一两汤匙磨碎的亚麻籽或奇亚籽即可。',
-    oil:f => `${f}富含脂溶性营养，配少量芝麻酱或好油一起吃更易吸收。`,
-    seed:(s, h, p) => `最后撒一小把${s}${h ? '，补' + h : ''}。${p}。`,
-    flavor:'无五辛提鲜：姜、香菇、海带高汤、芝麻、香草。'
+    ala:'亚麻籽要现磨才能吸收；每天一汤匙磨碎的亚麻籽即可。',
+    oil:f => `${f}富含脂溶性营养，配少量芝麻酱一起吃更易吸收。`,
+    seed:(s, h) => `撒一小把${s}${h ? '，补' + h : ''}。`,
+    turmeric:'每天 ¼ 茶匙姜黄，配少许黑胡椒，吸收更好。',
+    color:'五色入五脏，每餐力求青赤黄白黑俱全。',
+    flavor:'无五辛提鲜：姜、香菇、海带高汤、芝麻、紫苏、陈皮。'
   }
 },
 en:{
   title:'East–West Food Guide', brand:'东西有道食相连 · Pure plant-based ingredient guide', h1:'Five-color foods for your season and constitution',
-  tagline:'Choose where you live, the month and your body constitution. The guide lists in-season, nutrient-dense pure plant-based foods and arranges them as a five-color plate.',
+  tagline:'Choose where you live, the month and your body constitution to get an in-season, nutrient-rich, five-color pure plant-based meal.',
   lgPlace:'Where you live', hemi:'Hemisphere', clim:'Climate', hemiN:'Northern Hemisphere', hemiS:'Southern Hemisphere', climsub:'Tropical / subtropical', climtemp:'Temperate', climcold:'Cold winters',
   placeHint:'City not listed? Choose “Other region”, then pick your hemisphere and climate.',
   lgMonth:'Month', month:m => MONTHS_EN[m - 1], thisMonth:' (this month)',
   lgTz:'Constitution (体质)', tzcold:'Runs cold', tzneutral:'Balanced', tzhot:'Runs hot',
   tzHint:{cold:'You feel the cold, your hands and feet get cold, and raw or chilled food disagrees with you. Cooling foods rank lower, with a tip to cook them with ginger.', neutral:'No clear lean either way. Ranked by season and nutrition.', hot:'You feel the heat, get a dry mouth and tend toward “internal heat”. Warming foods rank lower.'},
-  tzNote:' A TCM practitioner can assess your constitution properly.',
+  tzNote:' For reference only; a TCM practitioner can assess you properly.',
+  quizTitle:'Not sure? Take a short quiz', quizOut:r => `Result: ${r}`, quizNeed:'Answer all 4 questions', quizApply:'Use this result',
+  quiz:[['Do you usually feel cold or hot?',['Cold','Neither','Hot']],['Are your hands and feet often cold?',['Often','Sometimes','Rarely; palms feel warm']],['Do you prefer hot or cold drinks?',['Hot','Either','Cold']],['Are your stools loose or dry?',['Loose','Normal','Dry, prone to “heat”']]],
   lgNut:'Nutrients to focus on', nutHint:'Leave blank to rank by overall nutrient density.', showOff:'Also show out-of-season foods',
   nut:{pro:'Protein', fe:'Iron', ca:'Calcium', zn:'Zinc', ala:'Omega-3', vc:'Vitamin C'},
-  hPlate:'Five-Color Plate', plateSub:'One main ingredient per color, the best fit right now; seeds and nuts appear in the tips as a topping. Laid out on the five directions: Fire (red) south at the top, Wood (green) east, Earth (yellow) in the center, Metal (white) west, Water (black) north.',
-  hTips:'Tips for this plate', hEss:'Everyone should know', hList:'All ingredients',
-  search:'Search, e.g. kale / 黑芝麻', all:'All',
+  hPlate:'Today’s meal', plateSub:'A grain base (“the five grains nourish”), topped with the five colors laid out on the five directions: Fire (red) south at the top, Wood (green) east, Earth (yellow) in the center, Metal (white) west, Water (black) north.',
+  stapleLbl:'Staple', stapleAuto:'Auto pick', baseLbl:'Base · the five grains nourish', withBean:'cooked with',
+  hPot:'Five colors, one pot', potSub:'A way to cook this meal as one pot. Sturdy ingredients go in first, tender ones last, and seeds after the heat is off.',
+  step:{1:'Put in first; bring to a boil, then simmer about 40–60 min (depends on the bean)', 2:'Add about 15–20 min before the end', 3:'Add about 5–8 min before the end', 4:'Add for the last 1–2 min', 5:'Sprinkle on after turning off the heat', 0:'Not in the pot: eat after the meal or on the side'},
+  stepFirst:{2:'Put in first; bring to a boil, then simmer about 15–20 min', 3:'Put in first; about 5–8 min'},
+  potNote:'Soak beans and rice for 4+ hours first. Beans must be fully cooked.',
+  hTips:'Pairing tips', evSci:'Science', evSciD:'backed by nutrition research', evTrad:'Tradition', evTradD:'from TCM food therapy',
+  hSpice:'Spices', spiceSub:(why) => `${why}None of these are among the five pungents.`, spiceWhyCold:'This season or constitution calls for warmth, so warming spices suit you.', spiceWhyHot:'This season or constitution runs hot, so keep warming spices light.', spiceWhyNeutral:'Balanced, so warming spices in moderation.',
+  spiceAll:'All spices (nature, uses, cautions)', spTh:['Spice','Nature','Meridians','Suits / avoid','Use in','Caution'],
+  hDD:'Daily Dozen checklist', ddSub:'Dr. Greger’s 12 food groups to eat each day. Tap the boxes to log today’s servings; this stays on your own device and resets each day. The grey text shows which foods in this meal count toward each group.',
+  dd:{beans:'Beans', berries:'Berries', fruits:'Other fruits', cruc:'Cruciferous', greens:'Greens', veg:'Other vegetables', flax:'Flaxseed', nuts:'Nuts & seeds', spices:'Spices (¼ tsp turmeric)', grains:'Whole grains', drinks:'Beverages', exercise:'Exercise'},
+  ddCount:(a, b) => `Today ${a} / ${b}`, ddReset:'Clear today', ddServ:'servings',
+  hEss:'Everyone should know', hList:'All ingredients', search:'Search by name or alias, e.g. kale / 芭乐', all:'All',
   ess:[['Must supplement','Vitamin B12','No reliable plant source; the analogues in nori don’t count. Take a supplement or fortified foods.'],
        ['As needed','Vitamin D','Mainly from sunlight. Consider a supplement in low-sun seasons or places; sun-dried shiitake adds a little.'],
        ['In moderation','Iodine','Use iodized salt, or small amounts of nori or wakame a few times a week. Kelp is extremely high in iodine, so not in large amounts every day.'],
        ['Consider','DHA / EPA','The ALA in flax and walnuts converts poorly; algae oil is an option if needed.']],
-  foot1:'Nutrient values are per 100 g of edible portion, from USDA FoodData Central. Dried foods (seeds, dried fruit, dried mushrooms) read high per 100 g; real servings are much smaller.',
-  foot2:'TCM properties, five colors, vitality (qi) and seasons are working drafts by the 东西有道食相连 group; items marked “draft” are awaiting review. This guide is general food-therapy reference and does not replace advice from a doctor or TCM practitioner.',
-  foot3:n => `Ingredient database v0.2 · ${n} ingredients`,
+  hPrin:'Our principles and references',
+  layers:[['Layer 1 · Baseline','Pure plant-based (no animal foods, none of the five pungents), built on whole, natural foods. Calcium-set tofu, fortified nutritional yeast and B12 supplements are necessary exceptions.'],
+          ['Layer 2 · Western nutrition: is it enough?','Nutrients are counted per serving against the US FDA Daily Values: 10%+ is a “good source”, 20%+ an “excellent source”. Daily structure follows the Daily Dozen.'],
+          ['Layer 3 · Eastern food therapy: what to choose and pair','Five colors and elements, cold/hot nature and constitution, seasons and solar terms. TCM properties are under review by a TCM practitioner. “Qi” (vitality) is shown for information only and does not affect ranking until the group defines it.'],
+          ['Layer 4 · Practice: buying and cooking','Organic priority, local supply and spices. Organic mainly means less pesticide residue and gentler farming; nutrient differences are small.']],
+  refs:'References: the Daily Dozen (NutritionFacts.org); EAT-Lancet 2025 plant-food reference intakes (about 2,400 kcal): vegetables 300 g, fruit 200 g, whole grains 210 g, starchy roots 50 g, legumes 75 g (up to 150 g), nuts 50 g, plant oils 40 g. The Daily Dozen advises against added oil, so the two differ on oil.',
+  foot1:'Nutrient data from USDA FoodData Central, counted per serving against US FDA Daily Values (protein 50 g, iron 18 mg, calcium 1,300 mg, zinc 11 mg, vitamin C 90 mg) and ALA 1.6 g.',
+  foot2:'TCM properties, five colors, qi and seasons are working drafts by the 东西有道食相连 group and are being reviewed by a TCM practitioner; items marked “draft” are unconfirmed. This guide is general food-therapy reference and does not replace advice from a doctor or TCM practitioner.',
+  foot3:n => `Ingredient database v0.3 · ${n} ingredients`,
   season:{春:'Spring', 夏:'Summer', 长夏:'Late summer', 秋:'Autumn', 冬:'Winter'},
   terms:t => ` · Solar terms: ${t.join(', ')}`, sTerms:' (matched by season in the Southern Hemisphere)',
   seasonAdvice:{春:'Spring nourishes the Liver. Favor green foods, fresh shoots and sprouts to support rising yang energy.', 夏:'Summer nourishes the Heart. Favor red foods with heat-clearing ingredients, and go easy on raw and iced food.', 长夏:'Late summer nourishes the Spleen. Dampness runs high, so favor yellow foods that strengthen the spleen and drain dampness.', 秋:'Autumn nourishes the Lungs. Favor white, moistening foods such as Chinese yam, lotus root and lotus seeds.', 冬:'Winter nourishes the Kidneys. Favor black, warming, storing foods such as black beans and black sesame.'},
@@ -325,28 +468,31 @@ en:{
   organ:{青:'Liver', 赤:'Heart', 黄:'Spleen', 白:'Lung', 黑:'Kidney'}, dir:{青:'East', 赤:'South', 黄:'Center', 白:'West', 黑:'North'},
   nat:{cold:'Cold', cool:'Cool', neutral:'Neutral', warm:'Warm', hot:'Hot', mixed:'Cold raw, warm cooked'}, natB:n => n,
   avail:{in:'In season', off:'Out of season', all:'Year-round', grown:'Grown year-round', stores:'Stores year-round', imported:'Mostly imported', notLocal:'Not grown locally', winterImp:'Winter: greenhouse or shipped in'},
-  rich:l => 'Rich in ' + l.map(x => x.replace(/^(?!Omega|Vitamin)./, c => c.toLowerCase())).join(', '), none:'None this month', noneHint:'Turn on “Also show out-of-season foods”', alt:'Or: ', sep:', ',
-  listSub:'Ranked by overall fit: season, constitution, chosen nutrients, wholeness and vitality all count.', hidden:n => ` ${n} out-of-season foods hidden.`,
+  pctB:(n, p) => `${n} ${p}%`, why:'Why: ', r:{fit:'suits your constitution', seasonColor:c => `${c.toLowerCase()} suits the season`, whole:'whole food', each:(n, p) => `${n} ${p}% per serving`},
+  none:'None this month', noneHint:'Turn on “Also show out-of-season foods”', alt:'Can’t find it? Try: ', sep:', ', join:' and ',
+  listSub:'Ranked by overall fit: season, constitution, chosen nutrients (per serving) and wholeness all count. Open a food to see why and its nutrition.', hidden:n => ` ${n} out-of-season foods hidden.`,
   more:n => `Show all ${n}`, empty:'No foods match. Try clearing the search, choosing “All” colors, or turning on “Also show out-of-season foods”.',
-  org:'Buy organic', per:b => `Per 100 g (${b})`, amount:'Amount',
+  org:'Buy organic', perS:s => `Per serving (${s})`, per100:b => `Per 100 g (${b})`, dvRow:'% Daily Value', amount:'Amount',
   rows:{kcal:'Energy', pro:'Protein', fib:'Fiber', ca:'Calcium', fe:'Iron', zn:'Zinc', ala:'ALA', vc:'Vit C'},
-  dt:{hi:'Highlights', xw:'Nature', yj:'Suits / avoid', wx:'Five elements', qi:'Vitality', prep:'How to eat', caut:'Caution', orgn:'Buying', trad:'Season'},
+  dt:{alias:'Also called', hi:'Highlights', xw:'Nature', yj:'Suits / avoid', wx:'Five elements', qi:'Vitality', prep:'How to eat', caut:'Caution', orgn:'Buying', trad:'Season', src:'Data'},
   gj:g => '; enters ' + g, wx:(c, el, org) => `${c} · ${el} · ${org}`,
   qiTxt:(q, w, n) => `Qi: ${q} · ${w} · ${n}`, qi:{高:'high', 中:'medium', 低:'low'}, whole:{完整:'Whole food', 轻加工:'Lightly processed', 加工:'Processed'},
   tradTxt:t => 'Traditional: ' + t, draft:/\(draft\)/g, draftLbl:'(draft)',
   tip:{
-    k:{seed:'Top', fe:'Iron', grain:'Grain', soak:'Soak', ginger:'Ginger', cool:'Cool', bal:'Balance', ca:'Calcium', ala:'Seeds', oil:'Oil', flavor:'Flavor'},
     feVc:(a, b) => `${a}: good iron sources. Eat them with ${b}; vitamin C greatly improves plant-iron absorption. Skip strong tea and coffee with meals.`,
     fe:a => `${a}: good iron sources. Add a vitamin C food (guava, red pepper or orange) to the same meal.`,
-    grainLeg:(g, l) => `${g} with ${l}: grains and beans together give more complete protein.`, grain:'Eat some grains and some beans each day for more complete protein.',
-    soak:b => `${b}: soak or sprout before cooking to cut phytates, improve mineral absorption and add vitality.`,
+    grainLeg:(g, l) => `Cook ${g} with ${l}: grains and beans together give more complete protein.`, grain:'Eat some grains and some beans each day for more complete protein.',
+    soak:b => `${b}: soak or sprout before cooking to cut phytates and improve mineral absorption.`,
+    soakTrad:'Sprouted seeds carry more vitality.',
     ginger:c => `${c}: cooling in nature. Eat cooked and warm, with a few slices of ginger.`, cool:w => `${w}: warming in nature. Keep portions small and pair with moistening foods.`,
-    bal:c => `This plate leans cool (${c}). Add ginger or red dates to balance it.`,
+    bal:c => `This meal leans cool (${c}). Add ginger or red dates to balance it.`,
     ca:'For calcium, favor bok choy, gai lan, kale and calcium-set tofu. Spinach is high in oxalate, so little of its calcium is absorbed.',
-    ala:'Grind flaxseed fresh or it passes undigested. One or two tablespoons of ground flax or chia a day is enough.',
-    oil:f => `${f}: rich in fat-soluble nutrients. Eat with a little tahini or good oil for better absorption.`,
-    seed:(s, h, p) => `Finish with a small handful of ${s}${h ? ' for ' + h : ''}. ${p}.`,
-    flavor:'Flavor without the five pungents (no onion or garlic): ginger, shiitake, kelp broth, sesame and herbs.'
+    ala:'Grind flaxseed fresh or it passes undigested; one tablespoon of ground flax a day is enough.',
+    oil:f => `${f}: rich in fat-soluble nutrients. Eat with a little tahini for better absorption.`,
+    seed:(s, h) => `Sprinkle on a small handful of ${s}${h ? ' for ' + h : ''}.`,
+    turmeric:'¼ teaspoon of turmeric a day, with a pinch of black pepper for better absorption.',
+    color:'The five colors nourish the five organs; aim for green, red, yellow, white and black at each meal.',
+    flavor:'Flavor without the five pungents (no onion or garlic): ginger, shiitake, kelp broth, sesame, perilla, aged tangerine peel.'
   }
 }};
 
@@ -368,18 +514,24 @@ const SEASON_COLOR = {春:'青', 夏:'赤', 长夏:'黄', 秋:'白', 冬:'黑'};
 const JIEQI = [[1,'小寒','Minor Cold'],[1,'大寒','Major Cold'],[2,'立春','Start of Spring'],[2,'雨水','Rain Water'],[3,'惊蛰','Awakening of Insects'],[3,'春分','Spring Equinox'],[4,'清明','Clear and Bright'],[4,'谷雨','Grain Rain'],[5,'立夏','Start of Summer'],[5,'小满','Grain Buds'],[6,'芒种','Grain in Ear'],[6,'夏至','Summer Solstice'],[7,'小暑','Minor Heat'],[7,'大暑','Major Heat'],[8,'立秋','Start of Autumn'],[8,'处暑','End of Heat'],[9,'白露','White Dew'],[9,'秋分','Autumn Equinox'],[10,'寒露','Cold Dew'],[10,'霜降','Frost’s Descent'],[11,'立冬','Start of Winter'],[11,'小雪','Minor Snow'],[12,'大雪','Major Snow'],[12,'冬至','Winter Solstice']];
 const COLORS = ['青','赤','黄','白','黑'];
 const TROPICAL_ONLY = new Set(['番石榴']);
+const NOT_IN_PLATE = new Set(['生姜','营养酵母(强化)']);
 const NOW = new Date();
+const TODAY = `${NOW.getFullYear()}-${NOW.getMonth()+1}-${NOW.getDate()}`;
 
 const $ = id => document.getElementById(id);
-const state = {lang:null, place:'miami', hemi:'N', clim:'sub', month:NOW.getMonth()+1, tz:'neutral', nutrients:[], showOff:false, q:'', color:'', expanded:false};
+const state = {lang:null, place:'miami', hemi:'N', clim:'sub', month:NOW.getMonth()+1, tz:'neutral', nutrients:[], showOff:false, staple:'auto', q:'', color:'', expanded:false};
 try { Object.assign(state, JSON.parse(localStorage.getItem('dxyd-guide')||'{}'), {q:'', color:'', expanded:false}); } catch(e) {}
-const h = (location.hash || '').slice(1);
-if(h === 'en' || h === 'zh') state.lang = h;
+const hh = (location.hash || '').slice(1);
+if(hh === 'en' || hh === 'zh') state.lang = hh;
 if(state.lang !== 'en' && state.lang !== 'zh') state.lang = /^zh/i.test(navigator.language || '') ? 'zh' : 'en';
 const save = () => { try { const {q,color,expanded,...rest} = state; localStorage.setItem('dxyd-guide', JSON.stringify(rest)); } catch(e) {} };
+let dd = {};
+try { dd = JSON.parse(localStorage.getItem('dxyd-dd-' + TODAY) || '{}'); } catch(e) {}
+const saveDD = () => { try { localStorage.setItem('dxyd-dd-' + TODAY, JSON.stringify(dd)); } catch(e) {} };
+const quiz = {};
 let L = T[state.lang];
 
-// ---------- logic (language-independent) ----------
+// ---------- logic ----------
 const nEq = (m, hemi) => hemi === 'S' ? ((m + 5) % 12) + 1 : m;
 const seasonOfN = mm => mm>=3&&mm<=5 ? '春' : mm>=6&&mm<=8 ? '夏' : mm>=9&&mm<=11 ? '秋' : '冬';
 function nature(xw){
@@ -409,23 +561,24 @@ function avail(f, st){
   if(st.clim === 'cold' && sea === '冬' && f.cat !== '根茎') return {s:'imp', k:'winterImp'};
   return {s:'in', k:'in'};
 }
+const pct = (f, k) => f.n[k] == null ? null : f.n[k] * f.serv.g / 100 / DV[k];
+const ADJ = {cold:{cold:-3, cool:-1.5, warm:1.5, hot:1}, hot:{cold:0.5, cool:1.2, warm:-1.5, hot:-3}, neutral:{}};
 function score(f, st, seaColor){
   let s = 0;
-  const hits = NUTK.filter(k => f.n[k] != null && f.n[k] >= TH[k]);
-  const w = /^干/.test(f.basis) ? 0.55 : 1;
-  if(st.nutrients.length){
-    st.nutrients.forEach(k => { const v = f.n[k]; if(v != null && v >= TH[k]) s += (3 + Math.min(v / TH[k], 4) * 0.6) * w; });
-  } else s += hits.length * 1.3 * w;
+  const P = {}; NUTK.forEach(k => P[k] = pct(f, k));
+  const hits = NUTK.filter(k => P[k] != null && P[k] >= 0.10).sort((a, b) => P[b] - P[a]);
+  if(st.nutrients.length) st.nutrients.forEach(k => { if(P[k] != null) s += Math.min(P[k], 0.5) * 12; });
+  else NUTK.forEach(k => { if(P[k] != null) s += Math.min(P[k], 0.4) * 6; });
   const a = avail(f, st);
   s += {in:3, all:1.2, imp:-1.5, off:-4}[a.s];
   const nat = nature(f.xw);
-  const ADJ = {cold:{cold:-3, cool:-1.5, warm:1.5, hot:1}, hot:{cold:0.5, cool:1.2, warm:-1.5, hot:-3}, neutral:{}};
-  s += (ADJ[st.tz][nat] || 0);
+  const adj = ADJ[st.tz][nat] || 0;
+  s += adj;
   if(f.whole === '完整') s += 0.8; else if(f.whole === '加工') s -= 1;
-  if(f.qi === '高') s += 0.8;
-  if(f.color === seaColor) s += 1;
+  const sc = f.color === seaColor;
+  if(sc) s += 1;
   if(f.n.pro == null && f.n.fe == null) s -= 2;
-  return {s, hits, a, nat};
+  return {s, P, hits, a, nat, adj, sc};
 }
 function seasonInfo(st){
   const mm = nEq(st.month, st.hemi);
@@ -434,17 +587,30 @@ function seasonInfo(st){
   return {key, color:SEASON_COLOR[key], terms:JIEQI.filter(j => j[0] === mm)};
 }
 
-// ---------- language helpers ----------
+// ---------- helpers ----------
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const tx = (f, k) => state.lang === 'en' ? f.e[k] : f[k];
+const en = () => state.lang === 'en';
+const tx = (f, k) => en() ? f.e[k] : f[k];
 const draftMark = s => esc(s).replace(L.draft, `<span class="draft">${L.draftLbl}</span>`);
-const nm = f => state.lang === 'en' ? f.en : f.zh;
-const nameList = arr => arr.slice(0, 2).map(x => nm(x.f)).join(state.lang === 'en' ? ' and ' : '、');
+const nm = f => en() ? f.en : f.zh;
+const nameList = (arr, max = 2) => arr.slice(0, max).map(x => nm(x.f || x)).join(L.join);
 const fmt = (v, k) => v == null ? '—' : (k === 'ca' || k === 'kcal' ? Math.round(v) : (+v).toFixed(1));
+const pp = p => Math.round(p * 100);
+const nutLower = n => en() && !/^(Omega|Vitamin)/.test(n) ? n.toLowerCase() : n;
+function reasons(x){
+  const out = [];
+  const sel = x.hits.filter(k => state.nutrients.includes(k));
+  (sel.length ? sel : x.hits).slice(0, 2).forEach(k => out.push(L.r.each(en() ? nutLower(L.nut[k]) : L.nut[k], pp(x.P[k]))));
+  if(x.a.s === 'in' || x.a.s === 'all') out.push(L.avail[x.a.k]);
+  if(x.adj > 0) out.push(L.r.fit);
+  if(x.sc) out.push(L.r.seasonColor(L.color[x.f.color]));
+  if(x.f.whole === '完整' && out.length < 4) out.push(L.r.whole);
+  return out;
+}
 
 function applyLang(){
   L = T[state.lang];
-  document.documentElement.lang = state.lang === 'en' ? 'en' : 'zh-CN';
+  document.documentElement.lang = en() ? 'en' : 'zh-CN';
   document.title = L.title;
   document.querySelectorAll('[data-t]').forEach(el => { el.textContent = L[el.dataset.t]; });
   document.querySelectorAll('[data-a]').forEach(el => el.setAttribute('aria-label', L[el.dataset.a]));
@@ -455,9 +621,20 @@ function applyLang(){
   $('cf').innerHTML = `<button type="button" data-c="" aria-pressed="${!state.color}">${L.all}</button>` +
     COLORS.map(c => `<button type="button" data-c="${c}" aria-pressed="${state.color === c}"><i class="dot c-${c}"></i>${L.color[c]}</button>`).join('');
   $('ess').innerHTML = L.ess.map(([tag, t, d]) => `<div class="ess"><span class="must">${tag}</span><b>${t}</b><span>${d}</span></div>`).join('');
+  $('layers').innerHTML = L.layers.map(([t, d], i) => `<div class="layer"><span class="ln">${i + 1}</span><div><b>${t}</b><p>${d}</p></div></div>`).join('');
+  $('refs').textContent = L.refs;
   $('q').placeholder = L.search; $('q').setAttribute('aria-label', L.search);
   $('foot3').textContent = L.foot3(FOODS.length);
+  $('quiz-qs').innerHTML = L.quiz.map(([q, opts], i) => `<fieldset class="qq"><legend>${i + 1}. ${q}</legend><div class="seg">${opts.map((o, j) =>
+    `<label><input type="radio" name="qz${i}" id="qz${i}-${j}" value="${j - 1}"><span>${o}</span></label>`).join('')}</div></fieldset>`).join('');
+  Object.entries(quiz).forEach(([i, v]) => { const el = $(`qz${i}-${v + 1}`); if(el) el.checked = true; });
+  $('quiz-apply').textContent = L.quizApply;
+  $('spice-table').innerHTML = `<thead><tr>${L.spTh.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>` + SPICES.map(s => `<tr>
+    <td><b>${esc(en() ? s.en : s.zh)}</b><br><small>${esc(en() ? s.zh : s.en)}</small></td>
+    <td>${draftMark(en() ? s.xw_en : s.xw)}</td><td>${draftMark(en() ? s.gj_en : s.gj)}</td><td>${draftMark(en() ? s.yj_en : s.yj)}</td>
+    <td>${esc(en() ? s.use_en : s.use)}</td><td>${esc(en() ? s.sci_en : s.sci)}</td></tr>`).join('') + '</tbody>';
   try { history.replaceState(null, '', '#' + state.lang); } catch(e) {}
+  updateQuiz();
 }
 function syncForm(){
   $('place').value = state.place;
@@ -469,77 +646,111 @@ function syncForm(){
   $('showOff').checked = state.showOff;
   $('tz-hint').textContent = L.tzHint[state.tz] + L.tzNote;
 }
+function quizResult(){
+  if(Object.keys(quiz).length < 4) return null;
+  const s = Object.values(quiz).reduce((a, b) => a + b, 0);
+  return s <= -2 ? 'cold' : s >= 2 ? 'hot' : 'neutral';
+}
+function updateQuiz(){
+  const r = quizResult();
+  $('quiz-out').textContent = r ? L.quizOut(L['tz' + r]) : L.quizNeed;
+  $('quiz-apply').hidden = !r || r === state.tz;
+}
 
 // ---------- render ----------
+let plateItems = [];
 function render(){
   const si = seasonInfo(state);
   const place = PLACES.find(p => p.id === state.place);
-  const en = state.lang === 'en';
   $('s-big').textContent = si.key;
-  $('s-where').textContent = (en ? L.season[si.key] + ' · ' : '') +
+  $('s-where').textContent = (en() ? L.season[si.key] + ' · ' : '') +
     `${place && place.id !== 'custom' ? place[state.lang] + ' · ' : ''}${state.hemi === 'N' ? L.hemiN : L.hemiS} · ${L['clim' + state.clim]} · ${L.month(state.month)}` +
-    (si.terms.length ? L.terms(si.terms.map(t => en ? `${t[2]} ${t[1]}` : t[1])) + (state.hemi === 'S' ? L.sTerms : '') : '');
+    (si.terms.length ? L.terms(si.terms.map(t => en() ? `${t[2]} ${t[1]}` : t[1])) + (state.hemi === 'S' ? L.sTerms : '') : '');
   $('s-advice').innerHTML = esc(L.seasonAdvice[si.key]) + L.favor(L.color[si.color], L.el[si.color], L.organ[si.color]);
 
   const scored = FOODS.map(f => ({f, ...score(f, state, si.color)})).sort((a, b) => b.s - a.s);
+  const byZh = zh => scored.find(x => x.f.zh === zh);
+
+  // staple + bean
+  const stapleCands = scored.filter(x => (x.f.cat === '全谷' || ['红薯','山药'].includes(x.f.zh)) && x.a.s !== 'off');
+  const sel = $('staple');
+  sel.innerHTML = `<option value="auto">${L.stapleAuto}${stapleCands.find(x => x.f.cat === '全谷') ? (en() ? ': ' : '：') + esc(nm(stapleCands.find(x => x.f.cat === '全谷').f)) : ''}</option>` +
+    stapleCands.map(x => `<option value="${esc(x.f.zh)}">${esc(nm(x.f))}</option>`).join('');
+  if(state.staple !== 'auto' && !stapleCands.some(x => x.f.zh === state.staple)) state.staple = 'auto';
+  sel.value = state.staple;
+  const autoStaple = stapleCands.find(x => x.f.cat === '全谷') || stapleCands[0];
+  const staple = state.staple === 'auto' ? autoStaple : byZh(state.staple);
+  const bean = scored.find(x => x.f.cat === '豆类' && x.f.whole === '完整' && x.f.stage === 1 && x.f.zh !== '黄豆' && x.a.s !== 'off');
+  const used = new Set([staple && staple.f.zh, bean && bean.f.zh]);
 
   const pick = {};
-  COLORS.forEach(c => { pick[c] = scored.filter(x => x.f.color === c && x.a.s !== 'off' && x.f.cat !== '坚果种子').slice(0, 3); });
-  const reason = x => {
-    const parts = [];
-    const sel = x.hits.filter(k => state.nutrients.includes(k));
-    const show = (sel.length ? sel : x.hits).slice(0, 3).map(k => L.nut[k]);
-    if(show.length) parts.push(L.rich(show));
-    parts.push(L.avail[x.a.k]);
-    if(x.nat) parts.push(L.natB(L.nat[x.nat]));
-    return parts.join(' · ');
-  };
+  COLORS.forEach(c => { pick[c] = scored.filter(x => x.f.color === c && x.a.s !== 'off' && x.f.cat !== '全谷' && x.f.cat !== '坚果种子' && !(x.f.cat === '豆类' && x.f.stage === 1) && !NOT_IN_PLATE.has(x.f.zh) && !used.has(x.f.zh)).sort((a, b) => (a.f.cat === '水果') - (b.f.cat === '水果')).slice(0, 3); });
+  const short = x => reasons(x).slice(0, 3).join(' · ');
   const cell = c => {
     const p = pick[c];
     const head = `<span class="dir">${L.dir[c]} · ${L.el[c]} · ${L.organ[c]}</span>`;
     if(!p.length) return `<div class="cell c-${c}">${head}<span class="nm">${L.none}</span><span class="why">${L.noneHint}</span></div>`;
     const top = p[0];
     return `<div class="cell c-${c}${c === si.color ? ' focus' : ''}">${head}
-      <span class="nm">${esc(nm(top.f))}</span><span class="why">${esc(reason(top))}</span>
+      <span class="nm">${esc(nm(top.f))}</span><span class="why">${esc(short(top))}</span>
       ${p.length > 1 ? `<span class="alt">${L.alt}${p.slice(1).map(x => esc(nm(x.f))).join(L.sep)}</span>` : ''}</div>`;
   };
   const corner = '<div class="cell empty" aria-hidden="true"></div>';
-  $('plate').innerHTML = corner + cell('赤') + corner + cell('青') + cell('黄') + cell('白') + corner + cell('黑') + corner;
+  const base = staple ? `<div class="base c-${staple.f.color}"><span class="dir">${L.baseLbl}</span>
+      <span class="nm">${esc(nm(staple.f))}${bean ? ` <small>${L.withBean}</small> ${esc(nm(bean.f))}` : ''}</span>
+      <span class="why">${esc(short(staple))}</span></div>` : '';
+  $('plate').innerHTML = corner + cell('赤') + corner + cell('青') + cell('黄') + cell('白') + corner + cell('黑') + corner + base;
+
+  const seed = scored.find(x => x.f.cat === '坚果种子' && x.a.s !== 'off');
+  const colorTops = COLORS.map(c => pick[c][0]).filter(Boolean);
+  plateItems = [staple, bean, ...colorTops, seed].filter(Boolean);
+  const fruit = scored.find(x => x.f.cat === '水果' && x.a.s !== 'off' && !colorTops.includes(x));
+  const meal = [staple, bean, ...colorTops].filter(Boolean);
+  if(fruit) plateItems.push(fruit);
 
   // tips
-  const TP = L.tip;
-  const plate = Object.values(pick).map(p => p[0]).filter(Boolean);
-  const has = pred => plate.filter(pred);
+  const TP = L.tip, has = pred => plateItems.filter(pred);
   const tips = [];
-  const seed = scored.find(x => x.f.cat === '坚果种子' && x.a.s !== 'off');
+  const feS = has(x => x.P.fe >= 0.10), vcS = has(x => x.P.vc >= 0.10);
+  if(feS.length && vcS.length) tips.push(['sci', TP.feVc(nameList(feS), nameList(vcS))]);
+  else if(feS.length) tips.push(['sci', TP.fe(nameList(feS))]);
+  tips.push(['sci', staple && bean && staple.f.cat === '全谷' ? TP.grainLeg(nm(staple.f), nm(bean.f)) : TP.grain]);
+  const beans = has(x => x.f.cat === '豆类' && x.f.whole === '完整');
+  if(beans.length) tips.push(['both', TP.soak(nameList(beans)) + ' ' + TP.soakTrad]);
+  const coldOnes = meal.filter(x => x.nat === 'cold' || x.nat === 'cool'), warmOnes = meal.filter(x => x.nat === 'warm' || x.nat === 'hot');
+  if(state.tz === 'cold' && coldOnes.length) tips.push(['trad', TP.ginger(nameList(coldOnes))]);
+  if(state.tz === 'hot' && warmOnes.length) tips.push(['trad', TP.cool(nameList(warmOnes))]);
+  if(state.tz === 'neutral' && coldOnes.length && !warmOnes.length) tips.push(['trad', TP.bal(nameList(coldOnes))]);
+  if(state.nutrients.includes('ca')) tips.push(['sci', TP.ca]);
+  if(state.nutrients.includes('ala')) tips.push(['sci', TP.ala]);
+  const fatSol = meal.filter(x => /胡萝卜素|维A|番茄红素/.test(x.f.hi));
+  if(fatSol.length) tips.push(['sci', TP.oil(nameList(fatSol))]);
   if(seed){
     const selH = state.nutrients.filter(k => seed.hits.includes(k));
-    const hl = (selH.length ? selH : seed.hits).slice(0, 3).map(k => L.nut[k]);
-    const hs = hl.length ? (en ? hl.map(x => /^(Omega|Vitamin)/.test(x) ? x : x.toLowerCase()).join(', ') : hl.join('、')) : '';
-    tips.push(['seed', TP.seed(nm(seed.f), hs, tx(seed.f, 'prep').split(/；|; /)[0])]);
+    const hl = (selH.length ? selH : seed.hits).slice(0, 3).map(k => nutLower(L.nut[k]));
+    tips.push(['sci', TP.seed(nm(seed.f), hl.join(en() ? ', ' : '、'))]);
   }
-  const feS = has(x => x.f.n.fe >= TH.fe), vcS = has(x => x.f.n.vc >= TH.vc);
-  if(feS.length && vcS.length) tips.push(['fe', TP.feVc(nameList(feS), nameList(vcS))]);
-  else if(feS.length) tips.push(['fe', TP.fe(nameList(feS))]);
-  const legumes = has(x => x.f.cat === '豆类'), grains = has(x => x.f.cat === '全谷');
-  tips.push(['grain', legumes.length && grains.length ? TP.grainLeg(nameList(grains), nameList(legumes)) : TP.grain]);
-  const beans = legumes.filter(x => x.f.whole === '完整');
-  if(beans.length) tips.push(['soak', TP.soak(nameList(beans))]);
-  const coldOnes = has(x => x.nat === 'cold' || x.nat === 'cool'), warmOnes = has(x => x.nat === 'warm' || x.nat === 'hot');
-  if(state.tz === 'cold' && coldOnes.length) tips.push(['ginger', TP.ginger(nameList(coldOnes))]);
-  if(state.tz === 'hot' && warmOnes.length) tips.push(['cool', TP.cool(nameList(warmOnes))]);
-  if(state.tz === 'neutral' && coldOnes.length && !warmOnes.length) tips.push(['bal', TP.bal(nameList(coldOnes))]);
-  if(state.nutrients.includes('ca')) tips.push(['ca', TP.ca]);
-  if(state.nutrients.includes('ala')) tips.push(['ala', TP.ala]);
-  const fatSol = has(x => /胡萝卜素|维A|番茄红素/.test(x.f.hi));
-  if(fatSol.length) tips.push(['oil', TP.oil(nameList(fatSol))]);
-  tips.push(['flavor', TP.flavor]);
-  $('tips').innerHTML = tips.map(([k, t]) => `<li><span class="k">${TP.k[k]}</span><span>${esc(t)}</span></li>`).join('');
+  tips.push(['sci', TP.turmeric]);
+  tips.push(['trad', TP.color]);
+  tips.push(['trad', TP.flavor]);
+  const evTag = t => t === 'both' ? `<span class="ev sci">${L.evSci}</span><span class="ev trad">${L.evTrad}</span>` : `<span class="ev ${t}">${t === 'sci' ? L.evSci : L.evTrad}</span>`;
+  $('tips').innerHTML = tips.map(([t, s]) => `<li><span class="evs">${evTag(t)}</span><span>${esc(s)}</span></li>`).join('');
+
+  // spices
+  const sea = si.key;
+  const warmNeed = state.tz === 'cold' || (state.tz === 'neutral' && (sea === '冬' || sea === '秋'));
+  const coolNeed = state.tz === 'hot' || (state.tz === 'neutral' && (sea === '夏' || sea === '长夏'));
+  const sp = ['姜黄','黑胡椒', ...(warmNeed ? ['肉桂','白胡椒','八角'] : coolNeed ? ['紫苏叶','陈皮'] : ['小茴香','陈皮'])];
+  $('spice-sub').textContent = L.spiceSub(warmNeed ? L.spiceWhyCold : coolNeed ? L.spiceWhyHot : L.spiceWhyNeutral);
+  $('spice-picks').innerHTML = sp.map(z => SPICES.find(s => s.zh === z)).map(s => `<div class="sp">
+    <b>${esc(en() ? s.en : s.zh)}</b> <small>${esc(en() ? s.zh : s.en)} · ${L.nat[s.nat]}</small><span>${esc(en() ? s.use_en : s.use)}</span></div>`).join('');
+
+  renderDD();
 
   // list
   const q = state.q.trim().toLowerCase();
   const list = scored.filter(x => (state.showOff || x.a.s !== 'off') && (!state.color || x.f.color === state.color) &&
-    (!q || x.f.zh.toLowerCase().includes(q) || x.f.en.toLowerCase().includes(q) || x.f.cat.includes(q) || x.f.e.cat.toLowerCase().includes(q)));
+    (!q || [x.f.zh, x.f.en, x.f.cat, x.f.e.cat, x.f.alias].some(s => (s || '').toLowerCase().includes(q))));
   const hidden = scored.filter(x => x.a.s === 'off').length;
   $('list-sub').textContent = L.listSub + (!state.showOff && hidden ? L.hidden(hidden) : '');
   const shown = state.expanded || q || state.color ? list : list.slice(0, 12);
@@ -549,31 +760,49 @@ function render(){
   const m = $('more'); if(m) m.onclick = () => { state.expanded = true; render(); };
 }
 
+function renderDD(){
+  const total = DDEF.reduce((a, d) => a + d.n, 0);
+  const done = DDEF.reduce((a, d) => a + Math.min(dd[d.k] || 0, d.n), 0);
+  $('dd-count').textContent = L.ddCount(done, total);
+  $('dd').innerHTML = DDEF.map(d => {
+    const inMeal = d.k === 'spices' ? (en() ? 'turmeric' : '姜黄') : plateItems.filter(x => d.m(x.f)).map(x => nm(x.f)).join(L.sep);
+    const c = dd[d.k] || 0;
+    return `<div class="ddr"><div class="ddl"><b>${L.dd[d.k]}</b>${inMeal ? `<small>${esc(inMeal)}</small>` : ''}</div>
+      <div class="ddb">${Array.from({length:d.n}, (_, i) => `<button type="button" data-k="${d.k}" data-i="${i + 1}" aria-pressed="${i < c}" aria-label="${L.dd[d.k]} ${i + 1}"></button>`).join('')}</div></div>`;
+  }).join('');
+}
+
 function foodCard(x, i){
-  const f = x.f, en = state.lang === 'en';
-  const nut = x.hits.map(k => `<span class="b nut${state.nutrients.includes(k) ? ' sel' : ''}">${L.nut[k]}</span>`).join('');
+  const f = x.f;
+  const chips = x.hits.map(k => `<span class="b nut${state.nutrients.includes(k) ? ' sel' : ''}">${L.pctB(L.nut[k], pp(x.P[k]))}</span>`).join('');
   const rows = [['kcal','kcal'], ['pro','g'], ['fib','g'], ['ca','mg'], ['fe','mg'], ['zn','mg'], ['ala','g'], ['vc','mg']];
-  const val = k => tx(f, k);
-  const ok = v => v && v !== '—';
-  const gj = val('gj');
+  const val = k => tx(f, k), ok = v => v && v !== '—';
+  const g = f.serv.g, gj = val('gj');
+  const serving = (en() ? f.serv.en : f.serv.zh) + (/\d\s?g|\d克/.test(en() ? f.serv.en : f.serv.zh) ? '' : `, ${g} ${en() ? 'g' : '克'}`);
   return `<details class="food">
     <summary>
       <span class="sw c-${f.color}">${f.color}</span>
-      <span class="fname">${esc(en ? f.en : f.zh)}<small>${esc(en ? f.zh : f.en)}</small></span>
+      <span class="fname">${esc(nm(f))}<small>${esc(en() ? f.zh : f.en)}</small></span>
       <span class="rank">#${i + 1}</span>
       <span class="badges">
         <span class="b ${x.a.s}">${L.avail[x.a.k]}</span>
         ${x.nat ? `<span class="b">${L.natB(L.nat[x.nat])}</span>` : ''}
-        ${nut}
+        ${chips}
         ${f.orgp === '高' ? `<span class="b org">${L.org}</span>` : ''}
       </span>
+      <span class="reason">${L.why}${esc(reasons(x).join(' · '))}</span>
     </summary>
     <div class="fbody">
       <div class="ntable"><table>
-        <thead><tr><th style="text-align:left">${esc(L.per(en ? f.e.basis : f.basis))}</th>${rows.map(r => `<th>${L.rows[r[0]]}</th>`).join('')}</tr></thead>
-        <tbody><tr><td style="text-align:left;color:var(--muted)">${L.amount}</td>${rows.map(r => `<td class="${TH[r[0]] && f.n[r[0]] >= TH[r[0]] ? 'hit' : ''}">${fmt(f.n[r[0]], r[0])}${f.n[r[0]] == null ? '' : ' ' + r[1]}</td>`).join('')}</tr></tbody>
+        <thead><tr><th style="text-align:left"></th>${rows.map(r => `<th>${L.rows[r[0]]}</th>`).join('')}</tr></thead>
+        <tbody>
+          <tr><td class="rl">${esc(L.perS(serving))}</td>${rows.map(r => `<td>${f.n[r[0]] == null ? '—' : fmt(f.n[r[0]] * g / 100, r[0]) + ' ' + r[1]}</td>`).join('')}</tr>
+          <tr><td class="rl">${L.dvRow}</td>${rows.map(r => { const p = DV[r[0]] ? x.P[r[0]] : null; return `<td class="${p != null && p >= 0.2 ? 'hit2' : p != null && p >= 0.1 ? 'hit' : ''}">${p == null ? '' : pp(p) + '%'}</td>`; }).join('')}</tr>
+          <tr class="sub"><td class="rl">${esc(L.per100(en() ? f.e.basis : f.basis))}</td>${rows.map(r => `<td>${fmt(f.n[r[0]], r[0])}</td>`).join('')}</tr>
+        </tbody>
       </table></div>
       <dl class="kv">
+        ${f.alias ? `<dt>${L.dt.alias}</dt><dd>${esc(f.alias)}</dd>` : ''}
         ${ok(val('hi')) ? `<dt>${L.dt.hi}</dt><dd>${draftMark(val('hi'))}</dd>` : ''}
         ${ok(val('xw')) ? `<dt>${L.dt.xw}</dt><dd>${draftMark(val('xw'))}${ok(gj) ? draftMark(L.gj(gj)) : ''}</dd>` : ''}
         ${ok(val('yj')) ? `<dt>${L.dt.yj}</dt><dd>${draftMark(val('yj'))}</dd>` : ''}
@@ -583,6 +812,7 @@ function foodCard(x, i){
         ${ok(val('caut')) ? `<dt>${L.dt.caut}</dt><dd>${draftMark(val('caut'))}</dd>` : ''}
         ${ok(val('orgn')) ? `<dt>${L.dt.orgn}</dt><dd>${draftMark(val('orgn'))}</dd>` : ''}
         ${ok(val('trad')) ? `<dt>${L.dt.trad}</dt><dd>${esc(L.tradTxt(val('trad')))}</dd>` : ''}
+        <dt>${L.dt.src}</dt><dd><small>${esc(f.src)}</small></dd>
       </dl>
     </div>
   </details>`;
@@ -594,6 +824,7 @@ const form = $('form');
 form.addEventListener('submit', e => e.preventDefault());
 form.addEventListener('change', e => {
   const t = e.target;
+  if(t.name && t.name.startsWith('qz')){ quiz[+t.name.slice(2)] = +t.value; updateQuiz(); return; }
   if(t.id === 'place'){
     state.place = t.value;
     const p = PLACES.find(p => p.id === t.value);
@@ -605,8 +836,17 @@ form.addEventListener('change', e => {
   else if(t.id.startsWith('nut-')) state.nutrients = NUTK.filter(k => $('nut-' + k).checked);
   else if(t.id === 'showOff') state.showOff = t.checked;
   state.expanded = false;
-  syncForm(); save(); render();
+  syncForm(); updateQuiz(); save(); render();
 });
+$('quiz-apply').addEventListener('click', () => { const r = quizResult(); if(r){ state.tz = r; syncForm(); updateQuiz(); save(); render(); } });
+$('staple').addEventListener('change', e => { state.staple = e.target.value; save(); render(); });
+$('dd').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  const k = b.dataset.k, i = +b.dataset.i;
+  dd[k] = (dd[k] || 0) === i ? i - 1 : i;
+  saveDD(); renderDD();
+});
+$('dd-reset').addEventListener('click', () => { dd = {}; saveDD(); renderDD(); });
 document.querySelector('.langsw').addEventListener('click', e => {
   const b = e.target.closest('button'); if(!b || b.dataset.lang === state.lang) return;
   state.lang = b.dataset.lang; save(); applyLang(); syncForm(); render();
